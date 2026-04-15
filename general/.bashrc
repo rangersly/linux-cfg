@@ -126,8 +126,10 @@ function cpr() {
 }
 
 # 快速导航
-alias ..='cd ..'
-alias ...='cd ../..'
+alias .='cd ..'
+alias ..='cd ../..'
+alias ...='cd ../../..'
+alias ....='cd ../../../..'
 alias ~='cd ~'
 
 # 网络相关
