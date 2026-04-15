@@ -10,8 +10,7 @@ MAPPINGS=(
     ".bashrc:general/.bashrc"
     ".vimrc:general/.vimrc"
     ".tmux.conf:general/.tmux.conf"
-    ".vim/config:general/.vim/config"
-    ".vim/dict:general/.vim/dict"
+    ".vim/:general/.vim/"
 )
 
 usage() {
