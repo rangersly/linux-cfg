@@ -1,3 +1,6 @@
+typeof
+constexpr
+nullptr
 include
 restrict
 auto
@@ -7,16 +10,12 @@ char
 const
 continue
 default
-do
 double
 else
 enum
 extern
 float
-for
 goto
-if
-int
 long
 register
 return
@@ -32,7 +31,6 @@ unsigned
 void
 volatile
 while
-
 class
 delete
 explicit
@@ -59,7 +57,6 @@ reinterpret_cast
 static_cast
 typeid
 endl
-
 printf
 scanf
 fopen
@@ -70,7 +67,6 @@ fread
 fwrite
 sprintf
 sscanf
-
 malloc
 free
 calloc

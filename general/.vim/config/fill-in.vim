@@ -36,7 +36,7 @@ function! s:TriggerComplete()
     " 获取光标前尾部连续非空字符（\S 匹配非空白）
     let tail = matchstr(before, '\w\+$')
 
-    if len(tail) >= 3 && !g:auto_comp_triggered
+    if len(tail) >= 2 && !g:auto_comp_triggered
         call feedkeys("\<C-n>", 'n')
         let g:auto_comp_triggered = 1
     elseif len(tail) == 0
