@@ -1,3 +1,7 @@
+ifndef
+ifdef
+endif
+int
 typeof
 constexpr
 nullptr
