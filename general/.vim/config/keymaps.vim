@@ -18,6 +18,7 @@ nnoremap <tab> <c-w>w
 
 " 保存退出
 nnoremap <space>w :w<cr>
+nnoremap <space>q :q<cr>
 
 " 多标签页(使用gt进行标签页间切换)
 nnoremap <space>tt <c-w>T
