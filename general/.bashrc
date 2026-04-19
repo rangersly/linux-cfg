@@ -125,12 +125,6 @@ function cpr() {
     return $exit_code
 }
 
-# 快速导航
-alias .='cd ..'
-alias ..='cd ../..'
-alias ...='cd ../../..'
-alias ....='cd ../../../..'
-alias ~='cd ~'
 
 # 网络相关
 alias myip='curl ifconfig.me'           # 获取公网IP
@@ -158,6 +152,13 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# 快速导航
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ~='cd ~'
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
