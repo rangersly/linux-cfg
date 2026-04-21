@@ -9,13 +9,24 @@ HISTFILESIZE=10000              # 历史文件最大行数
 HISTCONTROL=ignoreboth          # 忽略重复命令和空格开头的命令
 shopt -s histappend             # 追加历史而不是覆盖
 
+echo -e "\e[1;36m<==============================>\e[0m"
+
+# 检查工具安装情况
+check_tools() {
+    if ! command -v "$1" &>/dev/null; then
+        echo -e "\e[1;31mPlease install ==> \e[1;33m$1\e[0m"
+    fi
+}
+check_tools "tree"
+check_tools "git"
+check_tools "vim"
+
 # 默认编辑器
 export EDITOR=vim
 export VISUAL=vim
 
 # 自定义PATH
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin
-
 
 # PS1提示符
 
@@ -162,4 +173,5 @@ alias ~='cd ~'
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
-echo -e "\e[1;34mversion:1.0\e[0m"
+echo -e "\e[1;34mUpdate Time:26-04-21\e[0m"
+echo -e "\e[1;36m<==============================>\e[0m"
