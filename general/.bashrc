@@ -92,12 +92,13 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-# ls别称
-alias l='ls -slFh --group-directories-first'
-alias ll='ls -aslFh --group-directories-first'
+# lsd别称
+alias l='lsd -lh --git'
+alias ll='lsd -lh --git -a --total-size'
+alias lt='lsd --tree --ignore-glob ".git"'
 
 # 安全操作确认
-alias rr='rm -i'
+alias rr='rm -rI'
 
 # rsync封装函数
 function cpr() {
