@@ -17,9 +17,14 @@ check_tools() {
         echo -e "\e[1;31mPlease install ==> \e[1;33m$1\e[0m"
     fi
 }
-check_tools "tree"
+check_tools "lsd"
 check_tools "git"
 check_tools "vim"
+check_tools "tmux"
+check_tools "rsync"
+check_tools "gcc"
+check_tools "g++"
+check_tools "gdb"
 
 # 默认编辑器
 export EDITOR=vim
@@ -174,5 +179,5 @@ alias ~='cd ~'
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
-echo -e "\e[1;34mUpdate Time:26-04-21\e[0m"
+echo -e "\e[1;34mUpdate Time:26-04-22\e[0m"
 echo -e "\e[1;36m<==============================>\e[0m"
