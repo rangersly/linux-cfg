@@ -25,6 +25,7 @@ set path+=**
 autocmd FileType c setlocal dictionary+=~/.vim/dict/cpp.dict
 autocmd FileType cpp setlocal dictionary+=~/.vim/dict/cpp.dict
 autocmd FileType cmake setlocal dictionary+=~/.vim/dict/cmake.dict
+
 " 状态标记：当前连续非空字符序列是否已触发过补全
 let g:auto_comp_triggered = 0
 
@@ -55,3 +56,4 @@ augroup END
 
 " Tab 键智能映射
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
