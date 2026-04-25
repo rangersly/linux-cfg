@@ -12,8 +12,8 @@ nnoremap <space>b :ls<cr>:b<space>
 nnoremap <space>e :b#<cr>
 
 " 页面分割操作
-nnoremap <space>s :split<space>
-nnoremap <space>v :vsp<space>
+nnoremap <space>s :ls<cr>:split<space>
+nnoremap <space>v :ls<cr>:vsp<space>
 nnoremap <tab> <c-w>w
 
 " 保存退出
@@ -22,7 +22,7 @@ nnoremap <space>q :q<cr>
 
 " 多标签页(使用gt进行标签页间切换)
 nnoremap <space>tt <c-w>T
-nnoremap <space>tb :buffers<cr>:tabedit #
+nnoremap <space>tb :ls<cr>:tabedit #
 
 " 操作优化
 inoremap jf <esc>:w<cr>
