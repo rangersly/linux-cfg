@@ -1,3 +1,6 @@
+stdint
+stdio
+iostream
 ifndef
 ifdef
 endif
@@ -24,7 +27,6 @@ long
 register
 return
 short
-signed
 sizeof
 static
 struct

@@ -24,7 +24,7 @@ set path+=**
 " 根据文件类型设置不同的字典文件
 autocmd FileType c setlocal dictionary+=~/.vim/dict/cpp.dict
 autocmd FileType cpp setlocal dictionary+=~/.vim/dict/cpp.dict
-
+autocmd FileType cmake setlocal dictionary+=~/.vim/dict/cmake.dict
 " 状态标记：当前连续非空字符序列是否已触发过补全
 let g:auto_comp_triggered = 0
 
