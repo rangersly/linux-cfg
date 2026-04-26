@@ -32,6 +32,9 @@ nnoremap <space>r :reg<cr>
 " 补全
 inoremap jn <c-x><c-f>
 
+" 模糊搜索快捷键
+nnoremap <leader>f :find *
+
 " 打开文件树
 nnoremap <leader>l :Lex<cr>
 

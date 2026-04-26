@@ -8,18 +8,19 @@ set updatetime=300
 " 延迟重绘屏幕,在宏、脚本、函数执行期间不更新屏幕,执行完一次性更新
 set lazyredraw
 " 允许递归扫描 include 目录
-set path=.,/usr/include,**
+set path=.,/usr/include,**,~/**
 
 " 设置补全菜单行为
 set completeopt=menu,menuone,noselect,noinsert,popup
 set shortmess+=c  " 减少补全提示的干扰信息
-set pumheight=15  " 补全菜单最大高度
-set wildoptions+=fuzzy
+set pumheight=48  " 补全菜单最大高度
 
 " 增强命令行补全
 set wildmenu
 set wildmode=full
-set path+=**
+set wildignore+=*/node_modules/*,*/target/*,*/.git/*,*.o,*.class,*.pyc
+set wildoptions=pum
+set wildignorecase " 处理小写
 
 " 根据文件类型设置不同的字典文件
 autocmd FileType c setlocal dictionary+=~/.vim/dict/cpp.dict
