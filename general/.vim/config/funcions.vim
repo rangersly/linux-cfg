@@ -60,3 +60,10 @@ function! FileSize()
     return printf('%.1f', bytes/1024.0/1024.0) . 'M'
   endif
 endfunction
+
+" 自动获取GIT项目根目录
+function! SearchRoot() abort
+  let l:file_dir = expand('%:p:h')
+  let l:git_dir = finddir('.git', l:file_dir . ';')
+  return l:git_dir !=# '' ? fnamemodify(l:git_dir, ':h') : l:file_dir
+endfunction

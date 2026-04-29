@@ -8,26 +8,26 @@ nnoremap <Leader>cw :%s/\s\+$//e<CR>
 nnoremap <leader>cn :call ConvertChinesePunctuationEnhanced()<CR>
 
 " 缓冲区操作
-nnoremap <space>b :ls<cr>:b<space>
-nnoremap <space>e :b#<cr>
+nnoremap <leader>b :ls<cr>:b<space>
+nnoremap <leader>e :b#<cr>
 
 " 页面分割操作
-nnoremap <space>s :ls<cr>:split<space>
-nnoremap <space>v :ls<cr>:vsp<space>
+nnoremap <leader>s :ls<cr>:split #
+nnoremap <leader>v :ls<cr>:vsp #
 nnoremap <tab> <c-w>w
 
 " 保存退出
-nnoremap <space>w :w<cr>
-nnoremap <space>q :q<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>q :q<cr>
 
 " 多标签页(使用gt进行标签页间切换)
-nnoremap <space>tt <c-w>T
-nnoremap <space>tb :ls<cr>:tabedit #
+nnoremap <leader>tt <c-w>T
+nnoremap <leader>tb :ls<cr>:tabedit #
 
 " 操作优化
 inoremap jf <esc>:w<cr>
 nnoremap gf <c-w>f<c-w>T
-nnoremap <space>r :reg<cr>
+nnoremap <leader>r :reg<cr>
 
 " 补全
 inoremap jn <c-x><c-f>
@@ -35,8 +35,14 @@ inoremap jn <c-x><c-f>
 " 模糊搜索快捷键
 nnoremap <leader>f :find *
 
-" 打开文件树
-nnoremap <leader>l :Lex<cr>
+" 快捷列出当前目录
+nnoremap <leader>t :!lsd --tree --ignore-glob ".git"<CR>
+
+" <Leader>fw : 递归搜索光标下单词 (word under cursor)
+nnoremap <silent> <leader>gf :silent exe 'grep! "\b' . expand('<cword>') . '\b" ' . SearchRoot() <Bar> redraw!<CR>
+
+" <Leader>ff : 手动输入搜索词,递归搜索
+nnoremap <silent> <leader>gg :silent exe 'grep! ' . input('Search: ') . ' ' . SearchRoot() <Bar> redraw!<CR>
 
 " 中文符号转英文符号
 inoremap ！ !

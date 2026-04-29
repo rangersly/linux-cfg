@@ -1,8 +1,8 @@
-" 自动补全
-source ~/.vim/config/fill-in.vim
-
 " 通用设置
 source ~/.vim/config/general.vim
+
+" 自动补全
+source ~/.vim/config/fill-in.vim
 
 " 界面设置
 source ~/.vim/config/ui.vim
