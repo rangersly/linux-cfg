@@ -67,3 +67,28 @@ function! SearchRoot() abort
   let l:git_dir = finddir('.git', l:file_dir . ';')
   return l:git_dir !=# '' ? fnamemodify(l:git_dir, ':h') : l:file_dir
 endfunction
+
+" 自动文件搜索
+function! FindFileQF(pattern) abort
+  if empty(a:pattern) | return | endif
+  let l:files = []
+  " 直接在这里添加你想搜索的目录
+  call extend(l:files, globpath(expand('~'), '**/*' . a:pattern . '*', 0, 1))
+  call extend(l:files, globpath('/usr/include', '**/*' . a:pattern . '*', 0, 1))
+  " 当前窗口本地目录下递归搜索包含 pattern 的文件
+  " let l:glob_pattern = '**/*' . a:pattern . '*'
+  " let l:files = globpath('.', l:glob_pattern, 0, 1)
+
+  " 过滤掉目录和 .git 下的文件
+  call filter(l:files, '!isdirectory(v:val) && v:val !~ "/\\.git/"')
+
+  if empty(l:files)
+    echohl WarningMsg | echo 'No files found for: ' . a:pattern | echohl None
+    return
+  endif
+
+  " 构建 quickfix 列表
+  let l:qflist = map(l:files, '{"filename": v:val, "lnum": 1, "text": v:val}')
+  call setqflist(l:qflist)
+  cwindow
+endfunction

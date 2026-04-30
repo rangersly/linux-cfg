@@ -11,9 +11,7 @@ nnoremap <leader>cn :call ConvertChinesePunctuationEnhanced()<CR>
 nnoremap <leader>b :ls<cr>:b<space>
 nnoremap <leader>e :b#<cr>
 
-" 页面分割操作
-nnoremap <leader>s :ls<cr>:split #
-nnoremap <leader>v :ls<cr>:vsp #
+" 窗口快速切换
 nnoremap <tab> <c-w>w
 
 " 保存退出
@@ -29,11 +27,14 @@ inoremap jf <esc>:w<cr>
 nnoremap gf <c-w>f<c-w>T
 nnoremap <leader>r :reg<cr>
 
+" 取消搜索时高亮
+nnoremap <leader>nn :nohl<cr>
+
 " 补全
 inoremap jn <c-x><c-f>
 
 " 模糊搜索快捷键
-nnoremap <leader>f :find *
+nnoremap <silent> <leader>f :call FindFileQF(input('Find file: '))<CR>
 
 " 快捷列出当前目录
 nnoremap <leader>t :!lsd --tree --ignore-glob ".git"<CR>
