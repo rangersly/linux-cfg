@@ -11,6 +11,7 @@ MAPPINGS=(
     ".vimrc:general/.vimrc"
     ".tmux.conf:general/.tmux.conf"
     ".vim/:general/.vim/"
+    ".config/nvim/:general/nvim/"
 )
 
 usage() {

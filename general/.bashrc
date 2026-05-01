@@ -27,8 +27,9 @@ check_tools "g++"
 check_tools "gdb"
 
 # 默认编辑器
-export EDITOR=vim
-export VISUAL=vim
+alias vi='nvim'
+export EDITOR=nvim
+export VISUAL=nvim
 
 # 自定义PATH
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin
