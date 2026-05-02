@@ -2,36 +2,34 @@ local opt = vim.opt
 
 -- ===基础配置===
 
-opt.autoindent = true       -- 换行时保持与前一行相同的缩进
-opt.wrap = true             -- 自动折行
-opt.mouse = "a"             -- 启用鼠标支持
-opt.timeoutlen = 800        -- 快捷键的等待时间(毫秒)
-opt.iskeyword:append("_,-") -- 将 - 和 _ 也视为单词的一部分
+opt.autoindent = true               -- 换行时保持与前一行相同的缩进
+opt.wrap = true                     -- 自动折行
+opt.mouse = "a"                     -- 启用鼠标支持
+opt.timeoutlen = 800                -- 快捷键的等待时间(毫秒)
+opt.iskeyword:append("_,-")         -- 将 - 和 _ 也视为word的一部分
 opt.clipboard:append("unnamedplus") -- 系统剪切板
+opt.autoread = true                 -- 自动加载外部修改
 
 -- 新窗口向右和下
 opt.splitright = true
 opt.splitbelow = true
 
 -- ===Tab===
---
-opt.incsearch = true        -- 每输入一个字符立即高亮第一个匹配
-opt.smartcase =true         -- 智能大小写敏感
-opt.expandtab = true        -- Tab 展开为空格
-opt.tabstop = 4             -- 一个 Tab 占 4 个空格宽度
-opt.softtabstop = 4         -- 退格键一次删除 4 个空格
-opt.shiftwidth = 4          -- 自动缩进时使用 4 个空格的宽度
--- 编辑 Makefile 时自动将 expandtab 关闭,保留真正的 Tab
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "make",
-  command = "setlocal noexpandtab",
-})
+
+opt.incsearch = true -- 每输入一个字符立即高亮第一个匹配
+opt.smartcase = true -- 智能大小写敏感
+opt.expandtab = true -- Tab 展开为空格
+opt.tabstop = 4      -- 一个 Tab 占 4 个空格宽度
+opt.softtabstop = 4  -- 退格键一次删除 4 个空格
+opt.shiftwidth = 4   -- 行首自动缩进时使用 4 个空格的宽度
 
 -- ===外观===
 
-opt.cursorline = true
-opt.termguicolors = true
-opt.signcolumn ="yes"
+opt.cursorline = true       -- 高亮当前行
+opt.colorcolumn = "80"      -- 高亮某一列
+opt.termguicolors = true    -- 终端真彩色
+opt.signcolumn = "yes"
+opt.showmode = false        -- 关闭模式显示
 
 -- ===智能行号===
 

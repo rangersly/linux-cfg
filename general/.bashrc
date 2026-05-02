@@ -27,12 +27,13 @@ check_tools "g++"
 check_tools "gdb"
 
 # 默认编辑器
-alias vi='nvim'
+alias nv='nvim'
 export EDITOR=nvim
 export VISUAL=nvim
 
 # 自定义PATH
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 # PS1提示符
 
@@ -180,5 +181,5 @@ alias ~='cd ~'
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
-echo -e "\e[1;34mUpdate Time:26-04-22\e[0m"
+echo -e "\e[1;34mUpdate Time:26-05-02\e[0m"
 echo -e "\e[1;36m<==============================>\e[0m"
