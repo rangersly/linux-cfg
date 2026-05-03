@@ -1,8 +1,5 @@
 return {
     "folke/which-key.nvim",
-    dependencies = {        -- 依赖项
-        "nvim-mini/mini.nvim"
-    },
     event = "VeryLazy",
     opts = {
         preset = "helix",          -- 现代风格,默认就是垂直列表
