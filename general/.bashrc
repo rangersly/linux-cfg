@@ -101,7 +101,8 @@ alias egrep='egrep --color=auto'
 
 # lsd别称
 alias l='lsd -lh --git'
-alias ll='lsd -lh --git -a --total-size'
+alias ll='lsd -lh --git -a'
+alias ls='lsd -lh --git -a --total-size'
 alias lt='lsd --tree --ignore-glob ".git"'
 
 # 安全操作确认
@@ -181,5 +182,5 @@ alias ~='cd ~'
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
-echo -e "\e[1;34mUpdate Time:26-05-02\e[0m"
+echo -e "\e[1;34mUpdate Time:26-05-04\e[0m"
 echo -e "\e[1;36m<==============================>\e[0m"

@@ -23,10 +23,10 @@ return {
             col = math.huge,                 -- 右侧对齐
             border = "single",
             padding = { 1, 2 },
-            width = { max = 50 },           -- 窗口最大宽度为50
+            width = { max = 60 },           -- 窗口最大宽度为60
         },
         layout = {
-            width = { min = 50, max = 50 },  -- 单列宽度,避免自动分列
+            width = { min = 50, max = 60 },  -- 单列宽度,避免自动分列
             spacing = 1,
         },
         expand = 0,                 -- 不自动展开组,保持每行一个映射

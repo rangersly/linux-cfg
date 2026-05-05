@@ -9,11 +9,11 @@ require("core.keymap")
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({
-        "git", 
-        "clone", 
+        "git",
+        "clone",
         "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git", 
-        "--branch=stable", 
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable",
         lazypath,
     })
 end
@@ -21,3 +21,5 @@ vim.opt.rtp:prepend(lazypath)   -- 自动识别安装的插件
 
 -- 加载 plugins 下的所有插件配置
 require("lazy").setup("plugins")
+
+require("core.dashboard")

@@ -4,7 +4,6 @@ return {
         hint_position = 3
     },
     keys = {
-        { "<leader>h", ":HopWord<cr>", desc = "快速跳转"}
+        { "<leader>h", ":HopWord<cr>", { desc = "快速跳转", silent = true }}
     },
-    event = "VeryLazy",       -- 懒加载,VeryLazy用在想懒加载又不知道具体时机时用
 }

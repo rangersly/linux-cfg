@@ -35,12 +35,6 @@ keymap.set('n', "<leader>wv", '<c-w>v', { desc = '左右切分窗口' })
 keymap.set('n', "<leader>wc", '<c-w>c', { desc = '关闭当前窗口' })
 keymap.set('n', "<leader>wo", '<c-w>o', { desc = '关闭其他所有窗口' })
 
--- lsp
-vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "显示文档" })
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "跳转到定义" })
-vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "查找引用" })
-
-
 -- 中文标点自动转英文标点 (仅在插入模式下)
 local punctuation_map = {
   ["！"] = "!",

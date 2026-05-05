@@ -1,7 +1,6 @@
 return {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },   -- 依赖项
-    event = "VeryLazy",       -- 懒加载,VeryLazy用在想懒加载又不知道具体时机时用
     keys = {
         -- 查找文件:智能识别 Git 仓库
         { "<leader>ff", function()

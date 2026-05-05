@@ -1,4 +1,5 @@
 local opt = vim.opt
+local vim = vim
 
 -- ===基础配置===
 
@@ -13,6 +14,10 @@ opt.autoread = true                 -- 自动加载外部修改
 -- 新窗口向右和下
 opt.splitright = true
 opt.splitbelow = true
+
+-- ===光标移动时上下方保留8行不顶框
+vim.o.scrolloff = 15
+vim.o.sidescrolloff = 15
 
 -- ===Tab===
 
@@ -30,6 +35,9 @@ opt.colorcolumn = "80"      -- 高亮某一列
 opt.termguicolors = true    -- 终端真彩色
 opt.signcolumn = "yes"
 opt.showmode = false        -- 关闭模式显示
+
+-- 补全增强
+vim.o.wildmenu = true
 
 -- ===智能行号===
 
