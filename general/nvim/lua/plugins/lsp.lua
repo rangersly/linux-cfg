@@ -23,6 +23,8 @@ return {
                 "pyright",  -- Python(也可换成 pylsp 或 basedpyright)
                 "clangd",   -- c - cpp
                 "marksman", -- markdown
+                "mpls",
+                "neocmake",    -- cmake
             },
             -- automatic_enable = true, -- 默认值:自动启用所有已安装的服务器
         },

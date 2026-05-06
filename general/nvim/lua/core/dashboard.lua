@@ -5,10 +5,10 @@
 -- ============================================
 -- 1. 定义自定义高亮颜色(粉、白、蓝)
 -- ============================================
-vim.api.nvim_set_hl(0, "DashboardPink", { fg = "#FF69B4", bold = true })  -- 亮粉色
+vim.api.nvim_set_hl(0, "DashboardPink", { fg = "#FF99E4", bold = true })  -- 亮粉色
 vim.api.nvim_set_hl(0, "DashboardWhite", { fg = "#FFFFFF", bold = true }) -- 纯白色
-vim.api.nvim_set_hl(0, "DashboardBlue", { fg = "#00BFFF", bold = true })  -- 深天蓝色
-vim.api.nvim_set_hl(0, "DashboardDim", { fg = "#A888E8" })                -- 灰色用于统计信息
+vim.api.nvim_set_hl(0, "DashboardBlue", { fg = "#80EFFF", bold = true })  -- 深天蓝色
+vim.api.nvim_set_hl(0, "DashboardYellow", { fg = "#D9D24F" })                -- 灰色用于统计信息
 
 -- ============================================
 -- 字符画:RANGERSLY(7行高,使用 █ 块绘制)
@@ -42,9 +42,6 @@ local function get_info_lines()
     local stats = require("lazy").stats()
     return {
         "",
-        string.format("         🚀 已加载插件:%d / %d              ⏱️  启动耗时:%.2f ms",
-            stats.loaded, stats.count, stats.startuptime),
-        "",
         "",
         "",
         "                           f               查找文件",
@@ -64,6 +61,12 @@ local function get_info_lines()
         "",
         "",
         "                           <Esc>/q         关闭本画面",
+        "",
+        "",
+        "",
+        string.format("         🚀 已加载插件:%d / %d" ..
+        "                       ⏱️  启动耗时:%.2f ms",
+            stats.loaded, stats.count, stats.startuptime),
     }
 end
 
@@ -76,7 +79,7 @@ local function show_dashboard()
     local info_lines = get_info_lines()
     local total_lines = #ascii_art + #info_lines
     local width = 90 -- 根据你的字符画宽度调整
-    local height = total_lines + 12
+    local height = total_lines
 
     -- 创建临时缓冲区
     local buf = vim.api.nvim_create_buf(false, true)
@@ -117,7 +120,7 @@ local function show_dashboard()
     -- 统计信息用灰色
     local info_start = #ascii_art
     for i = 0, #info_lines - 1 do
-        vim.api.nvim_buf_add_highlight(buf, -1, "DashboardDim", info_start + i, 0, -1)
+        vim.api.nvim_buf_add_highlight(buf, -1, "DashboardYellow", info_start + i, 0, -1)
     end
 
     -- 缓冲区属性(只读,关闭时自动清除)
