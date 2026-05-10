@@ -44,9 +44,6 @@ return {
     },
 
     -- ============================================
-    -- 4. 补全引擎:blink.cmp(现代替代 nvim-cmp)
-    -- ============================================
-    -- ============================================
     -- 4. 补全引擎：blink.cmp V1 稳定版
     -- ============================================
     {
@@ -63,7 +60,7 @@ return {
         opts = {
             -- 预设键盘映射：推荐使用 'default'（与内置补全类似，Ctrl-Y 确认）
             -- 其他可选：'super-tab'（Tab 确认，类似 VSCode）、'enter'（回车确认）、'none'（不设映射）
-            keymap = { preset = "default" },
+            keymap = { preset = "super-tab" },
 
             -- 补全来源，定义候选词的搜索来源，优先级按数组顺序
             sources = {
@@ -136,7 +133,7 @@ return {
                     vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
                         vim.tbl_extend("force", opts, { desc = "跳转到声明" }))
                     -- 显示悬浮文档
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover,
+                    vim.keymap.set("n", "gk", vim.lsp.buf.hover,
                         vim.tbl_extend("force", opts, { desc = "显示文档" }))
                     -- 显示引用
                     vim.keymap.set("n", "gr", vim.lsp.buf.references,
