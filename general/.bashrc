@@ -25,6 +25,10 @@ check_tools "rsync"
 check_tools "gcc"
 check_tools "g++"
 check_tools "gdb"
+check_tools "npm"
+check_tools "wget"
+check_tools "nvim"
+check_tools "btop"
 
 # 默认编辑器
 alias nv='nvim'
@@ -182,5 +186,5 @@ alias ~='cd ~'
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
-echo -e "\e[1;34mUpdate Time:26-05-04\e[0m"
+echo -e "\e[1;34mUpdate Time:26-05-11\e[0m"
 echo -e "\e[1;36m<==============================>\e[0m"
