@@ -135,7 +135,10 @@ local function show_dashboard()
     -- 6. 快捷操作映射(按下后关闭窗口并执行动作)
     -- ============================================
     local function close_and_exec(action)
-        vim.api.nvim_win_close(win, true)
+        -- 安全关闭窗口：如果窗口存在且有效才执行关闭
+        if win and vim.api.nvim_win_is_valid(win) then
+            pcall(vim.api.nvim_win_close, win, true)
+        end
         if type(action) == "string" then
             vim.cmd(action)
         elseif type(action) == "function" then
