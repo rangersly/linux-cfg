@@ -4,7 +4,7 @@ set complete=.,w,b,k,d,i
 " 补全时忽略大小写
 set infercase
 " 设置补全延迟（毫秒）
-set updatetime=300
+set updatetime=0
 " 延迟重绘屏幕,在宏、脚本、函数执行期间不更新屏幕,执行完一次性更新
 set lazyredraw
 " 允许递归扫描 include 目录
@@ -21,11 +21,6 @@ set wildmode=full
 set wildignore+=*/node_modules/*,*/target/*,*/.git/*,*.o,*.class,*.pyc
 set wildoptions=pum
 set wildignorecase " 处理小写
-
-" 根据文件类型设置不同的字典文件
-autocmd FileType c setlocal dictionary+=~/.vim/dict/cpp.dict
-autocmd FileType cpp setlocal dictionary+=~/.vim/dict/cpp.dict
-autocmd FileType cmake setlocal dictionary+=~/.vim/dict/cmake.dict
 
 " 状态标记：当前连续非空字符序列是否已触发过补全
 let g:auto_comp_triggered = 0

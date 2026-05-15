@@ -25,9 +25,6 @@ check_tools "rsync"
 check_tools "gcc"
 check_tools "g++"
 check_tools "gdb"
-check_tools "npm"
-check_tools "wget"
-check_tools "nvim"
 check_tools "btop"
 
 # 默认编辑器

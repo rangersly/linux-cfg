@@ -24,7 +24,7 @@ return {
                 "clangd",   -- c - cpp
                 "marksman", -- markdown
                 "mpls",
-                "neocmake",    -- cmake
+                "neocmake", -- cmake
             },
             -- automatic_enable = true, -- 默认值:自动启用所有已安装的服务器
         },
@@ -60,7 +60,12 @@ return {
         opts = {
             -- 预设键盘映射：推荐使用 'default'（与内置补全类似，Ctrl-Y 确认）
             -- 其他可选：'super-tab'（Tab 确认，类似 VSCode）、'enter'（回车确认）、'none'（不设映射）
-            keymap = { preset = "super-tab" },
+            -- keymap = { preset = "super-tab" },
+            keymap = {
+                preset = "default",            -- 保留其他按键的默认行为（比如 Ctrl-n/p）
+                ["<Tab>"] = { "select_next", "fallback" }, -- 菜单打开：选下一项；菜单关闭：插入 Tab
+                ["<S-Tab>"] = { "select_prev", "fallback" }, -- 菜单打开：选上一项；菜单关闭：插入 Shift-Tab
+            },
 
             -- 补全来源，定义候选词的搜索来源，优先级按数组顺序
             sources = {
@@ -114,7 +119,7 @@ return {
                     .. 'performance-*,'
                     .. 'modernize-*,'
                     .. '-modernize-use-trailing-return-type,' -- 不喜欢尾随返回类型
-                    .. '-readability-identifier-naming', -- 保留你已有的命名习惯
+                    .. '-readability-identifier-naming',      -- 保留你已有的命名习惯
                     -- 格式化回退风格（无 .clang-format 时使用）
                     '--fallback-style=Google',
                 },
