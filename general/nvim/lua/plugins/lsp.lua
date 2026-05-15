@@ -60,12 +60,7 @@ return {
         opts = {
             -- 预设键盘映射：推荐使用 'default'（与内置补全类似，Ctrl-Y 确认）
             -- 其他可选：'super-tab'（Tab 确认，类似 VSCode）、'enter'（回车确认）、'none'（不设映射）
-            -- keymap = { preset = "super-tab" },
-            keymap = {
-                preset = "default",            -- 保留其他按键的默认行为（比如 Ctrl-n/p）
-                ["<Tab>"] = { "select_next", "fallback" }, -- 菜单打开：选下一项；菜单关闭：插入 Tab
-                ["<S-Tab>"] = { "select_prev", "fallback" }, -- 菜单打开：选上一项；菜单关闭：插入 Shift-Tab
-            },
+            keymap = { preset = "super-tab" },
 
             -- 补全来源，定义候选词的搜索来源，优先级按数组顺序
             sources = {
@@ -82,7 +77,7 @@ return {
                 -- 文档窗口自动显示，延迟 200 毫秒ls
                 documentation = {
                     auto_show = true,
-                    auto_show_delay_ms = 200,
+                    auto_show_delay_ms = 100,
                 },
                 -- 在光标后显示灰色占位文本（ghost text）
                 ghost_text = { enabled = true },
