@@ -161,7 +161,8 @@ alias sscl='sudo systemctl'
 alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 
 # cmake命令简化
-alias rebuild='rm -rf build && cmake -B build -S . && cmake --build build/'
+alias rebuild='cmake -B build -S . --fresh && cmake --build build/'
+alias cbb='cmake --build build/'
 
 # 错误纠正
 shopt -s cdspell                     # 自动纠正cd命令的目录名拼写错误
@@ -184,5 +185,5 @@ alias ~='cd ~'
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
-echo -e "\e[1;34mUpdate Time:26-05-11\e[0m"
+echo -e "\e[1;34mUpdate Time:26-05-17\e[0m"
 echo -e "\e[1;36m<==============================>\e[0m"
