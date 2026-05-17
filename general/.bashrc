@@ -25,6 +25,7 @@ check_tools "rsync"
 check_tools "gcc"
 check_tools "g++"
 check_tools "gdb"
+check_tools "cmake"
 check_tools "btop"
 
 # 默认编辑器
@@ -159,8 +160,8 @@ alias sscl='sudo systemctl'
 # 快速查看电池信息
 alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 
-# gcc映射
-alias gc23='gcc -std=c2x'
+# cmake命令简化
+alias rebuild='rm -rf build && cmake -B build -S . && cmake --build build/'
 
 # 错误纠正
 shopt -s cdspell                     # 自动纠正cd命令的目录名拼写错误
