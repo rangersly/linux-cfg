@@ -35,6 +35,7 @@ return {
             { "<leader>q", group = "退出" },
             { "<leader>c", group = "文本更改" },
             { "<leader>w", group = "窗口操作" },
+            { "<leader>h", desc = "快速跳转"}
         },
     },
     keys = {
