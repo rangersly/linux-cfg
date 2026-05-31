@@ -91,15 +91,9 @@ parse_git_branch() {
  
      PS1+="\n${GitColor}> ${Reset}"
  }
- 
-# 如果 PROMPT_COMMAND 设置失败,回退到原始提示符
-# PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
 
 # 彩色输出
-alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
 
 # lsd别称
 alias l='lsd -lh --git'
@@ -107,8 +101,39 @@ alias ll='lsd -lh --git -a'
 alias ls='lsd -lh --git -a --total-size'
 alias lt='lsd --tree --ignore-glob ".git"'
 
-# 安全操作确认
-alias rr='rm -rI'
+# 安全回收站删除
+rf() {
+    local trash="/tmp/delete"
+    mkdir -p "$trash"
+    local force=false
+    local item base
+    for item in "$@"; do
+        case "$item" in
+            -f) force=true ;;
+            -*) ;;   # 忽略其他任何 - 开头的参数
+            *)
+                if [ -e "$item" ] || [ -L "$item" ]; then
+                    base=$(basename "$item")
+                    # 非强制模式 且 是隐藏文件 → 跳过
+                    if ! $force && [[ "$base" == .* ]]; then
+                        echo "rr: 跳过隐藏文件 '$item'" >&2
+                        continue
+                    fi
+                    # 移动（-n 防止覆盖回收站已有文件，-f 时改用 mv -f）
+                    if $force; then
+                        mv -f "$item" "$trash/${base}_$(date)_$$"
+                    else
+                        mv -n "$item" "$trash/${base}_$(date)_$$"
+                    fi
+                else
+                    echo "rr: 无法删除 '$item': 没有那个文件或目录" >&2
+                fi
+                ;;
+        esac
+    done
+}
+alias rl='lsd -lha /tmp/delete'
+alias rc='rm -rf /tmp/delete/*'
 
 # rsync封装函数
 function cpr() {
@@ -154,15 +179,8 @@ alias myip='curl ifconfig.me'           # 获取公网IP
 # 快速重载
 alias reload='source ~/.bashrc'
 
-# 快速使用 systemctl
-alias sscl='sudo systemctl'
-
-# 快速查看电池信息
-alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
-
 # cmake命令简化
-alias rebuild='cmake -B build -S . --fresh && cmake --build build/'
-alias cbb='cmake --build build/'
+alias rebuild='cmake --build build/'
 
 # 错误纠正
 shopt -s cdspell                     # 自动纠正cd命令的目录名拼写错误
@@ -180,10 +198,9 @@ fi
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias .....='cd ../../../..'
 alias ~='cd ~'
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
-echo -e "\e[1;34mUpdate Time:26-05-17\e[0m"
+echo -e "\e[1;34mUpdate Time:26-05-31\e[0m"
 echo -e "\e[1;36m<==============================>\e[0m"
