@@ -121,9 +121,9 @@ rf() {
                     fi
                     # 移动（-n 防止覆盖回收站已有文件，-f 时改用 mv -f）
                     if $force; then
-                        mv -f "$item" "$trash/${base}_$(date)_$$"
+                        mv -f "$item" "$trash/${base}_$(date +%y-%m-%d)_$$"
                     else
-                        mv -n "$item" "$trash/${base}_$(date)_$$"
+                        mv -n "$item" "$trash/${base}_$(date +%y-%m-%d)_$$"
                     fi
                 else
                     echo "rr: 无法删除 '$item': 没有那个文件或目录" >&2
