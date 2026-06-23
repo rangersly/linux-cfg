@@ -20,9 +20,6 @@ set softtabstop=4   " 编辑时退格键删除的空格数
 set shiftwidth=4    " 自动缩进使用的空格数
 set smarttab        " 行首使用Tab时,插入shiftwidth指定的空格数
 
-" 在编写makefile文件时使用tab
-autocmd FileType make setlocal noexpandtab
-
 augroup numbertoggle 	"智能切换绝对行号和相对行号
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif

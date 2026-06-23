@@ -73,11 +73,11 @@ function! FindFileQF(pattern) abort
   if empty(a:pattern) | return | endif
   let l:files = []
   " 直接在这里添加你想搜索的目录
-  call extend(l:files, globpath(expand('~'), '**/*' . a:pattern . '*', 0, 1))
-  call extend(l:files, globpath('/usr/include', '**/*' . a:pattern . '*', 0, 1))
+  "call extend(l:files, globpath(expand('~'), '**/*' . a:pattern . '*', 0, 1))
+  "call extend(l:files, globpath('/usr/include', '**/*' . a:pattern . '*', 0, 1))
   " 当前窗口本地目录下递归搜索包含 pattern 的文件
-  " let l:glob_pattern = '**/*' . a:pattern . '*'
-  " let l:files = globpath('.', l:glob_pattern, 0, 1)
+  let l:glob_pattern = '**/*' . a:pattern . '*'
+  let l:files = globpath('.', l:glob_pattern, 0, 1)
 
   " 过滤掉目录和 .git 下的文件
   call filter(l:files, '!isdirectory(v:val) && v:val !~ "/\\.git/"')

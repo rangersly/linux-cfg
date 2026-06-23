@@ -9,18 +9,13 @@ nnoremap <leader>cn :call ConvertChinesePunctuationEnhanced()<CR>
 
 " 缓冲区操作
 nnoremap <leader>b :ls<cr>:b<space>
-nnoremap <leader>e :b#<cr>
 
 " 窗口快速切换
 nnoremap <tab> <c-w>w
 
 " 保存退出
 nnoremap <leader>qw :wqa<cr>
-nnoremap <leader>q :qa<cr>
-
-" 多标签页(使用gt进行标签页间切换)
-nnoremap <leader>tt <c-w>T
-nnoremap <leader>tb :ls<cr>:tabedit #
+nnoremap <leader>qq :qa<cr>
 
 " 操作优化
 inoremap jf <esc>:w<cr>
