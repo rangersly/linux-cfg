@@ -4,8 +4,8 @@
 [[ $- != *i* ]] && return
 
 # 历史记录配置
-HISTSIZE=10000                   # 内存中保存的历史记录数量
-HISTFILESIZE=10000              # 历史文件最大行数
+HISTSIZE=1000                   # 内存中保存的历史记录数量
+HISTFILESIZE=1000              # 历史文件最大行数
 HISTCONTROL=ignoreboth          # 忽略重复命令和空格开头的命令
 shopt -s histappend             # 追加历史而不是覆盖
 
@@ -28,10 +28,10 @@ check_tools "gdb"
 check_tools "cmake"
 check_tools "btop"
 
-# 默认编辑器
 alias nv='nvim'
-export EDITOR=nvim
-export VISUAL=nvim
+# 默认编辑器
+export EDITOR=vim
+export VISUAL=vim
 
 # 自定义PATH
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin
@@ -43,12 +43,10 @@ export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 parse_git_branch() {
     git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
-
 # 用于显示 Git 分支
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
-
 # 设置自定义提示符
  PROMPT_COMMAND='__prompt_command'
  __prompt_command() {
@@ -102,7 +100,7 @@ alias ls='lsd -lh --git -a --total-size'
 alias lt='lsd --tree --ignore-glob ".git"'
 
 # 安全回收站删除
-rf() {
+rr() {
     local trash="/tmp/delete"
     mkdir -p "$trash"
     local force=false
@@ -136,9 +134,9 @@ alias rl='lsd -lha /tmp/delete'
 alias rc='rm -rf /tmp/delete/*'
 
 # rsync封装函数
-function cpr() {
+cr() {
     if [ $# -lt 2 ]; then
-        echo "Usage: cpr source... destination"
+        echo "Usage: cr source... destination"
         return 1
     fi
 
