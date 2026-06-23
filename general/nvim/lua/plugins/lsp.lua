@@ -142,7 +142,7 @@ return {
                     vim.keymap.set("n", "gn", vim.lsp.buf.rename,
                         vim.tbl_extend("force", opts, { desc = "重命名" }))
                     -- 代码动作
-                    vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action,
+                    vim.keymap.set({ "n", "v" }, "gj", vim.lsp.buf.code_action,
                         vim.tbl_extend("force", opts, { desc = "代码动作" }))
                     -- 格式化代码
                     vim.keymap.set("n", "<leader>cf", function()
