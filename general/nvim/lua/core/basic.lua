@@ -68,3 +68,9 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave"
         end
     end,
 })
+
+-- 退出插入模式时自动保存
+vim.api.nvim_create_autocmd("InsertLeave", {
+    pattern = "*",           -- 所有文件类型都生效
+    command = "silent! write", -- 静默保存,不提示错误
+})
