@@ -1,10 +1,19 @@
 #!/bin/bash
 # install-nvim.sh
 
-# 检查pyright的前置工具
-if ! command -v npm &>/dev/null; then
-    echo "Missing npm, please install"
-fi
+# 检查前置工具
+
+check() {
+    if ! command -v "$1" &>/dev/null; then
+        echo "Missing $1, please install"
+    fi
+}
+check "npm"
+check "unzip"
+check "curl"
+check "wget"
+check "tar"
+check "gzip"
 
 if ! command -v nvim &>/dev/null && [ ! -x /opt/nvim-linux-x86_64/bin/nvim ]; then
     curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
