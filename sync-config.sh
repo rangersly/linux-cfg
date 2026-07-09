@@ -56,7 +56,7 @@ push_mode() {
 
 # 拉取:仓库(script目录) -> 本地
 pull_mode() {
-    echo "更新仓库内容"
+    echo "更新仓库内容..."
     git pull
     echo "从仓库部署配置到本机..."
     for mapping in "${MAPPINGS[@]}"; do
