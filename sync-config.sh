@@ -7,15 +7,16 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # 映射关系 "本地路径:仓库相对路径(相对于脚本目录)"
 MAPPINGS=(
-    ".bashrc:general/.bashrc"
-    ".vimrc:general/.vimrc"
-    ".tmux.conf:general/.tmux.conf"
-    ".vim/:general/.vim/"
-    ".config/nvim/:general/nvim/"
+    ".bashrc:base-auto/.bashrc"
+    ".vimrc:base-auto/.vimrc"
+    ".tmux.conf:base-auto/.tmux.conf"
+    ".vim/:base-auto/.vim/"
+    ".config/nvim/:nvim/"
 )
 
 usage() {
     echo "用法: $0 {push|pull}"
+    echo "push - 从本机推送配置到仓库 / pull - 从仓库拉取最新配置到本机"
     exit 1
 }
 
@@ -55,6 +56,8 @@ push_mode() {
 
 # 拉取:仓库(script目录) -> 本地
 pull_mode() {
+    echo "更新仓库内容"
+    git pull
     echo "从仓库部署配置到本机..."
     for mapping in "${MAPPINGS[@]}"; do
         local_path="${mapping%%:*}"
