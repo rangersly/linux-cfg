@@ -1,16 +1,21 @@
-# Copyright(c) 2024 ely. All rights reserved.
-#
-# Name: format.sh v1.0
+# Copyright(c) 2026 rangersly. All rights reserved.
 #
 # Program:
-#	Shell Script format
+#	auto backup
 #
 # History:
+#	2026/07/09      rangersly       push to linux-cfg
 #	2024/07/24		e0x1a			new commit
 #
 # AUTHOR:
-#		e0x1a "e0x1a@aliyun.com"
+#		rangersly "2281598291@qq.com"
+#
 #!/bin/bash
+
+# 这个脚本目前看来有不少地方需要改进
+# 我的方案是设计成备份目录下单独给每个需要备份的应用分一个文件夹
+# 还有每个需要备份的项目单独写成一个表,包含项目所处地址,保留备份数量和备份频率
+
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 

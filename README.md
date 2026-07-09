@@ -1,21 +1,17 @@
 # Linux-cfg
 
-## 基本介绍
-
-这是一个linux上本人在用配置的集合,配置了自动部署脚本,欢迎大家一起优化哦
+一些 **Linux** 上的配置文件集合,和一些神奇小脚本
 
 ## **目录结构**
 
-- `sync-config.sh`  自动配置脚本
-- `server`  服务器相关
-  - `server-backup.sh`  服务器自动备份
-- `general`  通用配置
-  - `.vim/` & `.vimrc`  vim 相关配置
-  - `.tmux.conf`  tmux配置
-  - `.bashrc`  linux基础环境配置
-- `arch`  archlinux系统专用配置
-  - `archlinux-autoInstall.sh`  archlinux 自动安装脚本 
+|根目录下文件和文件夹|包含内容及作用|
+|---|---|
+|`sync-config`|推送或拉取`base-auto`中的配置文件|
+|`base-auto`|适用于任何linux发行版的简易配置|
+|`arch`|archlinux系统专用配置|
+|`nvim`|nvim相关配置|
+|`tools`|方便日常使用的小脚本|
 
-## 规划
+## 留言
 
-接下来打算从 **vim** 转 **neovim** 试试,弄好了会把配置加上的哦~
+我的计划是将每一份脚本和配置打上详细注释说明,方便使用者快速掌握,但是精力有限,如果有需要可以拉issue,我看到了就会补注释
