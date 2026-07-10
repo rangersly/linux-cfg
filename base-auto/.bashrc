@@ -27,11 +27,18 @@ check_tools "g++"
 check_tools "gdb"
 check_tools "cmake"
 check_tools "btop"
+check_tools "curl"
 
-alias nv='nvim'
-# 默认编辑器
+# 默认编辑器自动检测
 export EDITOR=vim
 export VISUAL=vim
+
+if command -v nvim &>/dev/null; then
+    alias nv='nvim'
+    export EDITOR=nvim
+    export VISUAL=nvim
+    echo "检测到 nvim, 设置为默认编辑器"
+fi
 
 # 自定义PATH
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin
@@ -200,5 +207,5 @@ alias ~='cd ~'
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
-echo -e "\e[1;34mUpdate Time:26-05-31\e[0m"
+echo -e "\e[1;34mUpdate Time:26-07-10\e[0m"
 echo -e "\e[1;36m<==============================>\e[0m"
