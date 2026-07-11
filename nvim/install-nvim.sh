@@ -9,6 +9,7 @@ check() {
     fi
 }
 check "npm"
+check "ripgrep"
 check "unzip"
 check "curl"
 check "wget"
