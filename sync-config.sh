@@ -22,6 +22,23 @@ usage() {
 
 [ $# -ne 1 ] && usage
 
+# 语法检查:推送前验证所有Shell脚本
+check_syntax() {
+    echo "检查Shell脚本语法..."
+    local errors=0
+    while IFS= read -r f; do
+        if ! bash -n "$f" 2>/dev/null; then
+            bash -n "$f" 2>&1 | sed 's/^/    /'
+            errors=$((errors + 1))
+        fi
+    done < <(find "$SCRIPT_DIR" -name "*.sh" -not -path "*/.git/*")
+    if [ $errors -gt 0 ]; then
+        echo "共 $errors 个文件有语法错误,中止推送" >&2
+        exit 1
+    fi
+    echo "  ✓ 语法检查通过"
+}
+
 # 复制函数(自动创建目标目录)
 copy_item() {
     local src="$1" dst="$2" desc="$3"
@@ -40,6 +57,7 @@ copy_item() {
 
 # 推送:本地 -> 仓库(script目录)
 push_mode() {
+    check_syntax
     echo "将本地配置同步到仓库..."
     for mapping in "${MAPPINGS[@]}"; do
         local_path="${mapping%%:*}"
