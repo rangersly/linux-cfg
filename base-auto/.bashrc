@@ -9,6 +9,11 @@ HISTFILESIZE=1000              # 历史文件最大行数
 HISTCONTROL=ignoreboth          # 忽略重复命令和空格开头的命令
 shopt -s histappend             # 追加历史而不是覆盖
 
+# 自定义PATH
+export PATH=$PATH:$HOME/.local/bin:$HOME/bin
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
+
 echo -e "\e[1;36m<==============================>\e[0m"
 
 # 检查工具安装情况
@@ -33,16 +38,6 @@ check_tools "curl"
 export EDITOR=vim
 export VISUAL=vim
 
-if command -v nvim &>/dev/null; then
-    alias nv='nvim'
-    export EDITOR=nvim
-    export VISUAL=nvim
-    echo "检测到 nvim, 设置为默认编辑器"
-fi
-
-# 自定义PATH
-export PATH=$PATH:$HOME/.local/bin:$HOME/bin
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 # PS1提示符
 
@@ -204,6 +199,17 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ~='cd ~'
+
+# opencode web 快速启动
+alias ow='opencode web --hostname 0.0.0.0 --port 20020'
+
+if command -v nvim &>/dev/null; then
+    alias nv='nvim'
+    export EDITOR=nvim
+    export VISUAL=nvim
+    echo "检测到 nvim, 设置为默认编辑器"
+fi
+
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
