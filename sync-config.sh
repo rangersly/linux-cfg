@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
-# 用法: ./sync.sh push   # 将本地配置更新到仓库(script目录)
-#       ./sync.sh pull   # 将仓库配置部署到本机
 
-# 脚本所在目录(即 docs/linux/script/)
+# 脚本所在目录
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# 映射关系 "本地路径:仓库相对路径(相对于脚本目录)"
+# 映射关系 "本地路径(相对于家目录):仓库相对路径(相对于脚本目录)"
 MAPPINGS=(
     ".bashrc:base-auto/.bashrc"
     ".vimrc:base-auto/.vimrc"
