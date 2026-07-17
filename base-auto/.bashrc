@@ -129,7 +129,7 @@ rr() {
     done
 }
 alias rl='lsd -lha /tmp/delete'
-alias rc='rm -rf /tmp/delete/*'
+alias rc='rm -rf /tmp/delete/{*,.[!.]*}'
 
 # rsync封装函数
 cr() {
@@ -209,5 +209,5 @@ fi
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
-echo -e "\e[1;34mUpdate Time:26-07-10\e[0m"
+echo -e "\e[1;34mUpdate Time:26-07-17\e[0m"
 echo -e "\e[1;36m<==============================>\e[0m"
