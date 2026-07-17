@@ -41,10 +41,6 @@ export VISUAL=vim
 
 # PS1提示符
 
-# Git状态集成(需安装git)
-parse_git_branch() {
-    git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
 # 用于显示 Git 分支
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
@@ -56,7 +52,7 @@ parse_git_branch() {
  
      # 颜色定义
      local Reset='\[\033[00m\]'
-     local TimeColor='\[\033[03;33m\]'  # 青色时间
+     local TimeColor='\[\033[03;33m\]'  # 黄色时间
      local UserColor='\[\033[01;32m\]'  # 绿色用户
      local HostColor='\[\033[01;32m\]'  # 绿色主机
      local PathColor='\[\033[01;34m\]'  # 蓝色路径
@@ -116,14 +112,14 @@ rr() {
                     base=$(basename "$item")
                     # 非强制模式 且 是隐藏文件 → 跳过
                     if ! $force && [[ "$base" == .* ]]; then
-                        echo "rr: 跳过隐藏文件 '$item'" >&2
+                        echo "rr: 跳过隐藏文件 '$item' - 使用-f参数可以强制移除" >&2
                         continue
                     fi
                     # 移动（-n 防止覆盖回收站已有文件，-f 时改用 mv -f）
                     if $force; then
-                        mv -f "$item" "$trash/${base}_$(date +%y-%m-%d)_$$"
+                        mv -f "$item" "$trash/${base}_$(date +%y-%m-%d_%H-%M-%S)"
                     else
-                        mv -n "$item" "$trash/${base}_$(date +%y-%m-%d)_$$"
+                        mv -n "$item" "$trash/${base}_$(date +%y-%m-%d_%H-%M-%S)"
                     fi
                 else
                     echo "rr: 无法删除 '$item': 没有那个文件或目录" >&2
