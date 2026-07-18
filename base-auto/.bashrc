@@ -170,7 +170,23 @@ cr() {
 
 
 # 网络相关
-alias myip='curl ifconfig.me'           # 获取公网IP
+myip() {
+    echo "=== IPv4 ==="
+    local ip4=$(curl -s -4 ifconfig.me)
+    if [ -n "$ip4" ]; then
+        curl -s "ipinfo.io/$ip4" | jq -r '"  IP:       \(.ip)\n  Hostname: \(.hostname // "N/A")\n  City:     \(.city // "N/A")\n  Region:   \(.region // "N/A")\n  Country:  \(.country // "N/A")\n  Org:      \(.org // "N/A")"'
+    else
+        echo "  无法获取 IPv4 地址"
+    fi
+    echo ""
+    echo "=== IPv6 ==="
+    local ip6=$(curl -s -6 ifconfig.me)
+    if [ -n "$ip6" ]; then
+        curl -s "ipinfo.io/$ip6" | jq -r '"  IP:       \(.ip)\n  Hostname: \(.hostname // "N/A")\n  City:     \(.city // "N/A")\n  Region:   \(.region // "N/A")\n  Country:  \(.country // "N/A")\n  Org:      \(.org // "N/A")"'
+    else
+        echo "  无法获取 IPv6 地址"
+    fi
+}
 
 # 快速重载
 alias reload='source ~/.bashrc'
@@ -209,5 +225,5 @@ fi
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
-echo -e "\e[1;34mUpdate Time:26-07-17\e[0m"
+echo -e "\e[1;34mUpdate Time:26-07-18\e[0m"
 echo -e "\e[1;36m<==============================>\e[0m"
