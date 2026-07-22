@@ -11,8 +11,6 @@ shopt -s histappend             # 追加历史而不是覆盖
 
 # 自定义PATH
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-
 
 echo -e "\e[1;36m<==============================>\e[0m"
 
