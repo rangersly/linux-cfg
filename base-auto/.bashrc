@@ -86,6 +86,11 @@ parse_git_branch() {
      PS1+="\n${GitColor}> ${Reset}"
  }
 
+# PS1 在vnev的虚拟环境提示
+if [ -n "$VIRTUAL_ENV" ]; then
+    PS1="(.venv) $PS1"
+fi
+
 # 彩色输出
 alias grep='grep --color=auto'
 
