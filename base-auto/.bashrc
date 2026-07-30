@@ -220,6 +220,8 @@ if command -v nvim &>/dev/null; then
     echo "检测到 nvim, 设置为默认编辑器"
 fi
 
+# 添加direnv的钩子
+eval "$(direnv hook bash)"
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
