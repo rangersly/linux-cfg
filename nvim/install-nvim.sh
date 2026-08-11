@@ -15,6 +15,7 @@ check "curl"
 check "wget"
 check "tar"
 check "gzip"
+check "clangd"
 
 if ! command -v nvim &>/dev/null && [ ! -x /opt/nvim-linux-x86_64/bin/nvim ]; then
     curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz

@@ -220,19 +220,27 @@ local function show_dashboard()
     -- ============================================
     -- 创建一个可重复触发的定时器对象(不立即启动)
     local timer = vim.uv.new_timer()
+    -- 防止 schedule 队列中残留的回调重复关闭已关闭的定时器(会报 "handle is already closing")
+    local closed = false
+    local function stop_timer()
+        if not closed then
+            closed = true
+            timer:close()
+        end
+    end
     -- 记录回调被调用次数
     local attempts = 0
     -- 启动定时器,首次延时50,之后每50ms触发一次,最后一个参数是回调函数
     timer:start(50, 50, vim.schedule_wrap(function()
         if not vim.api.nvim_buf_is_valid(buf) then
-            timer:close()
+            stop_timer()
             return
         end
         local stats = require("lazy").stats()
         attempts = attempts + 1
         -- 检测到有效启动时间，或者尝试超过 50 次就显示占位文本
         if stats.startuptime > 0 or attempts > 50 then
-            timer:close()
+            stop_timer()
             -- 确定要显示的内容
             local stat_text
             if stats.startuptime > 0 then

@@ -21,10 +21,12 @@ return {
             ensure_installed = {
                 "lua_ls",   -- Lua
                 "pyright",  -- Python(也可换成 pylsp 或 basedpyright)
-                "clangd",   -- c - cpp
                 "marksman", -- markdown
                 "mpls",
                 "neocmake", -- cmake
+                -- 注意:clangd 不在自动安装列表里。
+                -- 原因:mason 从 GitHub CDN 下载 clangd(约 115MB),新机器直连经常下载超时导致反复失败。
+                -- 改用系统 clangd:sudo apt install clangd(阿里云源速度快),下方 vim.lsp.config 配置同样生效。
             },
             -- automatic_enable = true, -- 默认值:自动启用所有已安装的服务器
         },
@@ -102,6 +104,9 @@ return {
                 update_in_insert = false, -- 只在离开插入模式后刷新诊断
             })
 
+            -- 全局lua_ls设置(消除 vim 等 Neovim 全局变量的误报)
+            vim.lsp.config('lua_ls', require('lsp.lua_ls'))
+
             -- 全局clangd设置
             vim.lsp.config('clangd', {
                 cmd = {
@@ -119,6 +124,9 @@ return {
                     '--fallback-style=Google',
                 },
             })
+            -- clangd 走系统安装(apt/手动下载),不在 mason ensure_installed 列表里,
+            -- 因此需要显式启用,否则 mason-lspconfig 不会自动 enable 它
+            vim.lsp.enable('clangd')
 
             -- 为 LSP 附着事件创建自动命令
             vim.api.nvim_create_autocmd("LspAttach", {
