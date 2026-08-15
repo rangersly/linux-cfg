@@ -3,7 +3,7 @@ return {
     event = "VeryLazy",
     opts = {
         preset = "helix",          -- 现代风格,默认就是垂直列表
-        delay = 0, -- 显示延迟
+        delay = 100, -- 显示延迟
         plugins = {     -- 关闭内置预设
             presets = {
                 operators = false,
