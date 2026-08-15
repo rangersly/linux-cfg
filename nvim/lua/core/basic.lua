@@ -12,6 +12,24 @@ opt.clipboard:append("unnamedplus") -- 系统剪切板
 opt.autoread = true                 -- 自动加载外部修改
 opt.fileformats = "unix,dos"        -- 优先使用unix格式
 
+-- 定时检查当前缓冲是否被外部修改并自动重载(checktime)
+-- 间隔单位:毫秒,可按需调整(此处为每 3 秒检查一次)
+-- 注意:缓冲存在未保存修改时不会自动覆盖,避免丢失本地改动
+local auto_reload_group = vim.api.nvim_create_augroup("auto_reload", { clear = true })
+local reload_timer = vim.uv.new_timer()
+reload_timer:start(1000, 3000, vim.schedule_wrap(function()
+    vim.cmd("silent! checktime %")
+end))
+
+-- 退出 nvim 时释放定时器,避免残留
+vim.api.nvim_create_autocmd("VimLeavePre", {
+    group = auto_reload_group,
+    callback = function()
+        reload_timer:stop()
+        reload_timer:close()
+    end,
+})
+
 -- 新窗口向右和下
 opt.splitright = true
 opt.splitbelow = true
