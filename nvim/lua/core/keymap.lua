@@ -35,6 +35,12 @@ keymap.set('n', "<leader>wv", '<c-w>v', { desc = '左右切分窗口' })
 keymap.set('n', "<leader>wc", '<c-w>c', { desc = '关闭当前窗口' })
 keymap.set('n', "<leader>wo", '<c-w>o', { desc = '关闭其他所有窗口' })
 
+-- 窗口大小调整
+keymap.set('n', "<leader>wh", '8<c-w><', { desc = '窗口变小' })
+keymap.set('n', "<leader>wl", '8<c-w>>', { desc = '窗口变大' })
+keymap.set('n', "<leader>wk", '4<c-w>+', { desc = '窗口变大' })
+keymap.set('n', "<leader>wj", '4<c-w>-', { desc = '窗口变小' })
+
 -- 中文标点自动转英文标点 (仅在插入模式下)
 local punctuation_map = {
   ["！"] = "!",
