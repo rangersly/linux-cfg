@@ -14,31 +14,7 @@ export PATH=$PATH:$HOME/.local/bin:$HOME/bin
 
 echo -e "\e[1;36m<==============================>\e[0m"
 
-# 检查工具安装情况
-check_tools() {
-    if ! command -v "$1" &>/dev/null; then
-        echo -e "\e[1;31mPlease install ==> \e[1;33m$1\e[0m"
-    fi
-}
-check_tools "lsd"
-check_tools "git"
-check_tools "vim"
-check_tools "tmux"
-check_tools "rsync"
-check_tools "gcc"
-check_tools "g++"
-check_tools "gdb"
-check_tools "cmake"
-check_tools "btop"
-check_tools "curl"
-
-# 默认编辑器自动检测
-export EDITOR=vim
-export VISUAL=vim
-
-
 # PS1提示符
-
 # 用于显示 Git 分支
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
@@ -89,11 +65,14 @@ parse_git_branch() {
 # 彩色输出
 alias grep='grep --color=auto'
 
-# lsd别称
-alias l='lsd -lh --git'
-alias ll='lsd -lh --git -a'
-alias ls='lsd -lh --git -a --total-size'
-alias lt='lsd --tree --ignore-glob ".git"'
+if command -v lsd &>/dev/null; then
+    # lsd别称
+    alias l='lsd -lh --git'
+    alias ll='lsd -lh --git -a'
+    alias ls='lsd -lh --git -a --total-size'
+    alias lt='lsd --tree --ignore-glob ".git"'
+    echo "检测到 lsd, 使用优化版 ls 映射"
+fi
 
 # 安全回收站删除
 rr() {
@@ -166,31 +145,8 @@ cr() {
     return $exit_code
 }
 
-
-# 网络相关
-myip() {
-    echo "=== IPv4 ==="
-    local ip4=$(curl -s -4 ifconfig.me)
-    if [ -n "$ip4" ]; then
-        curl -s "ipinfo.io/$ip4" | jq -r '"  IP:       \(.ip)\n  Hostname: \(.hostname // "N/A")\n  City:     \(.city // "N/A")\n  Region:   \(.region // "N/A")\n  Country:  \(.country // "N/A")\n  Org:      \(.org // "N/A")"'
-    else
-        echo "  无法获取 IPv4 地址"
-    fi
-    echo ""
-    echo "=== IPv6 ==="
-    local ip6=$(curl -s -6 ifconfig.me)
-    if [ -n "$ip6" ]; then
-        curl -s "ipinfo.io/$ip6" | jq -r '"  IP:       \(.ip)\n  Hostname: \(.hostname // "N/A")\n  City:     \(.city // "N/A")\n  Region:   \(.region // "N/A")\n  Country:  \(.country // "N/A")\n  Org:      \(.org // "N/A")"'
-    else
-        echo "  无法获取 IPv6 地址"
-    fi
-}
-
 # 快速重载
 alias reload='source ~/.bashrc'
-
-# cmake命令简化
-alias rebuild='cmake --build build/'
 
 # 错误纠正
 shopt -s cdspell                     # 自动纠正cd命令的目录名拼写错误
@@ -210,18 +166,27 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ~='cd ~'
 
-# opencode web 快速启动
-alias ow='opencode web --hostname 0.0.0.0 --port 20020'
+if command -v opencode &>/dev/null; then
+    # opencode web 快速启动
+    alias ow='opencode web --hostname 0.0.0.0 --port 20020'
+fi
 
 if command -v nvim &>/dev/null; then
     alias nv='nvim'
     export EDITOR=nvim
     export VISUAL=nvim
     echo "检测到 nvim, 设置为默认编辑器"
+else
+    # 默认编辑器
+    export EDITOR=vim
+    export VISUAL=vim
+    echo "未检测到 nvim, 将 vim 设置为默认编辑器"
 fi
 
-# 添加direnv的钩子
-eval "$(direnv hook bash)"
+if command -v direnv &>/dev/null; then
+    # 添加direnv的钩子
+    eval "$(direnv hook bash)"
+fi
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
