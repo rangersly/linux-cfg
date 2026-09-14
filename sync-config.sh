@@ -10,6 +10,11 @@ MAPPINGS=(
     ".tmux.conf:base-auto/.tmux.conf"
     ".vim/:base-auto/.vim/"
     ".config/nvim/:nvim/"
+    ".config/opencode/agent/:opencode/agent/"
+    ".config/opencode/command/:opencode/command/"
+    ".config/opencode/AGENTS.md:opencode/AGENTS.md"
+    ".config/opencode/skills/:opencode/skills/"
+    ".config/opencode/tui.json:opencode/tui.json"
 )
 
 usage() {
