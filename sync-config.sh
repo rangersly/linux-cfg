@@ -15,6 +15,7 @@ MAPPINGS=(
     ".config/opencode/AGENTS.md:opencode/AGENTS.md"
     ".config/opencode/skills/:opencode/skills/"
     ".config/opencode/tui.json:opencode/tui.json"
+    ".config/opencode/opencode.jsonc:opencode/opencode.jsonc"
 )
 
 usage() {
