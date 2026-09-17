@@ -136,6 +136,14 @@
             "context": 65535,
             "output": 8192
           }
+        },
+        "ornith1.5-9B.gguf": {
+          "name": "ornith1.5 (local)",
+          "tool_call": true,
+          "limit": {
+            "context": 128000,
+            "output": 8192
+          }
         }
       }
     }
