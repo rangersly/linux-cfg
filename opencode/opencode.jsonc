@@ -122,34 +122,19 @@
     "opencode-visual-cache"
   ],
   "provider": {
-    "sense-nova": {
+    "llama.cpp": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "Sense Nova",
+      "name": "llama-server (local)",
       "options": {
-        "baseURL": "https://token.sensenova.cn/v1",
-        "apiKey": "{env:SENSENOVA_API_KEY}"
+        "baseURL": "http://127.0.0.1:22233/v1"
       },
       "models": {
-        "sensenova-6.8-flash-lite": {
-          "name": "SenseNova 6.8 Flash-Lite",
-          "modalities": {
-            "input": ["text", "image"],
-            "output": ["text"]
-          },
+        "qwen3.8-27B.gguf": {
+          "name": "Qwen 3.8-27B (local)",
+          "tool_call": true,
           "limit": {
-            "context": 256000,
-            "output": 65536
-          }
-        },
-        "deepseek-v4-flash": {
-          "name": "deepseek-v4-flash",
-          "modalities": {
-            "input": ["text"],
-            "output": ["text"]
-          },
-          "limit": {
-            "context": 1000000,
-            "output": 65536
+            "context": 65535,
+            "output": 8192
           }
         }
       }

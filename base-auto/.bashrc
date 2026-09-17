@@ -11,6 +11,8 @@ shopt -s histappend             # 追加历史而不是覆盖
 
 # 自定义PATH
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 
 echo -e "\e[1;36m<==============================>\e[0m"
 
