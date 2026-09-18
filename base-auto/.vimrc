@@ -8,7 +8,7 @@ source ~/.vim/config/fill-in.vim
 source ~/.vim/config/ui.vim
 
 " 自定义增强函数
-source ~/.vim/config/funcions.vim
+source ~/.vim/config/functions.vim
 
 " 快捷键设置
 source ~/.vim/config/keymaps.vim

@@ -17,6 +17,11 @@ push 前会自动执行 `bash -n` 检查所有 `.sh` 文件语法，有错误则
 | `.tmux.conf` | `base-auto/.tmux.conf` |
 | `.vim/` | `base-auto/.vim/` |
 | `.config/nvim/` | `nvim/` |
+| `.config/opencode/agent` | `opencode/agent` |
+| `.config/opencode/command` | `opencode/command` |
+| `.config/opencode/skills` | `opencode/skills` |
+| `.config/opencode/opencode.jsonc` | `opencode/opencode.jsonc` |
+| `.config/opencode/tui.json` | `opencode/tui.json` |
 
 ## nvim/ — Neovim 配置
 
@@ -30,7 +35,8 @@ push 前会自动执行 `bash -n` 检查所有 `.sh` 文件语法，有错误则
 
 ### nvim 依赖工具
 
-`install-nvim.sh` 和 `check-event.sh` 检查的前置依赖：npm, ripgrep, unzip, curl, wget, tar, gzip
+`install-nvim.sh` 检查的前置依赖：npm, ripgrep, unzip, curl, wget, tar, gzip, clangd。
+（`check-event.sh` 曾存在，现已删除，仅保留 `install-nvim.sh`。）
 
 ## base-auto/.bashrc
 
