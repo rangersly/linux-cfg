@@ -20,8 +20,11 @@ push 前会自动执行 `bash -n` 检查所有 `.sh` 文件语法，有错误则
 | `.config/opencode/agent` | `opencode/agent` |
 | `.config/opencode/command` | `opencode/command` |
 | `.config/opencode/skills` | `opencode/skills` |
+| `.config/opencode/AGENTS.md` | `opencode/AGENTS.md` |
 | `.config/opencode/opencode.jsonc` | `opencode/opencode.jsonc` |
 | `.config/opencode/tui.json` | `opencode/tui.json` |
+| `.config/opencode/bash-guard.ts` | `opencode/bash-guard.ts` |
+| `.config/opencode/package.json` | `opencode/package.json` |
 
 ## nvim/ — Neovim 配置
 

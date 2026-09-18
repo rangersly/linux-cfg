@@ -16,6 +16,8 @@ MAPPINGS=(
     ".config/opencode/skills/:opencode/skills/"
     ".config/opencode/tui.json:opencode/tui.json"
     ".config/opencode/opencode.jsonc:opencode/opencode.jsonc"
+    ".config/opencode/bash-guard.ts:opencode/bash-guard.ts"
+    ".config/opencode/package.json:opencode/package.json"
 )
 
 usage() {

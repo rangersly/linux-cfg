@@ -13,12 +13,32 @@
     },
     "bash": {
       "*": "allow",
-      "rm *": "ask"
+      "rm *": "ask",
+      "find": "deny",
+      "find *": "deny",
+      "grep": "deny",
+      "grep *": "deny",
+      "rg": "deny",
+      "rg *": "deny",
+      "cat": "deny",
+      "cat *": "deny",
+      "head": "deny",
+      "head *": "deny",
+      "tail": "deny",
+      "tail *": "deny",
+      "sed": "deny",
+      "sed *": "deny",
+      "ls": "deny",
+      "ls *": "deny"
     }
   },
   "plugin": [
-    "opencode-visual-cache"
+    "opencode-visual-cache",
+    "./bash-guard.ts"
   ],
+  "experimental": {
+    "continue_loop_on_deny": true
+  },
   "provider": {
     "llama.cpp": {
       "npm": "@ai-sdk/openai-compatible",
@@ -32,7 +52,7 @@
           "tool_call": true,
           "limit": {
             "context": 65535,
-            "output": 32768
+            "output": 32768 
           }
         },
         "ornith1.5-9B.gguf": {
@@ -40,7 +60,7 @@
           "tool_call": true,
           "limit": {
             "context": 80000,
-            "output": 65535
+            "output": 65535 
           }
         }
       }
