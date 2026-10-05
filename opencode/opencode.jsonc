@@ -60,7 +60,7 @@
           "tool_call": true,
           "limit": {
             "context": 80000,
-            "output": 65535 
+            "output": 1000000 
           }
         }
       }
