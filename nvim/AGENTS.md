@@ -8,7 +8,9 @@ Neovim 配置（lazy.nvim 管理），面向 Neovim 0.11+（使用内置 `vim.ls
 - `lua/plugins/*.lua` — 每个插件一个 lazy.nvim spec 文件，自动加载，新增插件在此加文件
 - `lua/core/*.lua` — 基础选项、用户键位、启动页、工具函数
 - `lua/lsp/lua_ls.lua` — lua_ls 的 `vim` 全局配置，已由 `lua/plugins/lsp.lua` 中 `vim.lsp.config("lua_ls", require("lsp.lua_ls"))` 接入（注意：模块必须放在 `lua/` 下，config 根目录的非标准路径 require 会时好时坏）
-- `install-nvim.sh` — 引导脚本：安装 nvim 到 `/opt/nvim-linux-x86_64`，检查 npm/ripgrep/unzip/curl/wget/tar/gzip
+- `nvim-tool.sh` — 环境工具，三个子命令：`install`（联网引导安装 nvim）、`pack`（打包快照）、`deploy`（离线部署/恢复），详见文件内 `--help`
+- `install-nvim.sh` — 已合并进 `nvim-tool.sh install`，不再单独存在
+- `CONTEXT.md` / `docs/adr/` — 领域术语表与架构决策记录
 - `lazy-lock.json` — lazy.nvim 自动生成并维护，**不要手改**
 
 ## 约定
@@ -28,7 +30,9 @@ Neovim 配置（lazy.nvim 管理），面向 Neovim 0.11+（使用内置 `vim.ls
 
 ## 迁移到新机器
 
-- 步骤：`install-nvim.sh` → 拷贝整个配置目录（**必须含 `lazy-lock.json`**）→ 首次 `nvim` 让 lazy 按 lock 安装插件 → 首次启动会自动装 LSP 服务器
+- **离线迁移（推荐）**：源机 `nvim-tool.sh pack --with-nvim -o /media/移动盘` → 目标机 `nvim-tool.sh deploy /media/移动盘`（已含 config/lazy/mason/nvim 二进制，离线开箱即用）
+- **在线迁移**：目标机 `nvim-tool.sh install` → 拷贝整个配置目录（**必须含 `lazy-lock.json`**）→ 首次 `nvim` 让 lazy 按 lock 安装插件 → 首次启动会自动装 LSP 服务器
+- **崩溃恢复**：改配置前 `nvim-tool.sh pack`（恢复快照，中量）→ 出问题 `nvim-tool.sh deploy` 一键回滚
 - **踩过的坑（务必自检）**：`lazy-lock.json` 曾把 blink.cmp 锁在 main 分支的 V2 提交，导致新机器按 lock 装成 V2、启动报 `blink.lib not found` 崩溃。lock 里 blink.cmp 的 commit 必须对应 1.x 版本（当前 v1.10.2）；若再犯，执行 `:Lazy update blink.cmp` 让其按 `version="1.*"` 重新解析
 - clangd 装不上是网络问题（下载慢/超时），不要反复重试 mason，直接 apt 装系统 clangd
 
