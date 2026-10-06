@@ -10,6 +10,7 @@ return {
             end
           end, desc = "查找文件" },
         { "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "搜索关键字" },
+        { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "当前文件模糊搜索" },
         { "<leader>fb", "<cmd>Telescope buffers<CR>", desc = "搜索缓冲区文件" },
         { "<leader>fh", "<cmd>Telescope help_tags<CR>", desc = "帮助" },
     },
