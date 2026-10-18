@@ -17,6 +17,7 @@ push 前会自动执行 `bash -n` 检查所有 `.sh` 文件语法，有错误则
 | `.tmux.conf` | `base-auto/.tmux.conf` |
 | `.vim/` | `base-auto/.vim/` |
 | `.config/nvim/` | `nvim/` |
+| `.config/btop/` | `btop/` |
 | `.config/opencode/agent` | `opencode/agent` |
 | `.config/opencode/command` | `opencode/command` |
 | `.config/opencode/skills` | `opencode/skills` |
