@@ -67,4 +67,5 @@ Off the main flow entirely.
 - **`/skill-creator`** — create new skills, or improve and measure existing ones.
 - **`/resolving-merge-conflicts`** — resolve an in-progress git merge/rebase conflict.
 - **`/eda-schematic`** — parse 立创EDA/EasyEDA 原理图(JSON 源码、网表或截图)为结构化连接关系,分析电路工作原理、引脚接线、设计检查。
+- **`/component-datasheet`** — 阅读元器件规格书/数据手册(PDF)，把长篇规格书整理成可决策的中文报告，提炼选型要点、关键参数、设计约束与常见陷阱。当用户给出 datasheet、规格书、数据手册 PDF，或提到读/整理/讲解/选型某个芯片、IC、模块、传感器、电源、连接器时使用。
 - **Document & design skills** — `/docx`, `/pdf`, `/pptx`, `/xlsx` for Office documents and spreadsheets; `/canvas-design` for posters and static visual art. Use whenever those file types are involved.
