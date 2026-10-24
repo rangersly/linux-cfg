@@ -94,11 +94,15 @@ rr() {
                         echo "rr: 跳过隐藏文件 '$item' - 使用-f参数可以强制移除" >&2
                         continue
                     fi
+                    local dest="$trash/${base}_$(date +%y-%m-%d_%H-%M-%S)"
                     # 移动（-n 防止覆盖回收站已有文件，-f 时改用 mv -f）
                     if $force; then
-                        mv -f "$item" "$trash/${base}_$(date +%y-%m-%d_%H-%M-%S)"
+                        mv -f "$item" "$dest"
                     else
-                        mv -n "$item" "$trash/${base}_$(date +%y-%m-%d_%H-%M-%S)"
+                        mv -n "$item" "$dest"
+                    fi
+                    if [ -e "$dest" ] || [ -L "$dest" ]; then
+                        echo "已移入回收站: $dest"
                     fi
                 else
                     echo "rr: 无法删除 '$item': 没有那个文件或目录" >&2
@@ -106,8 +110,8 @@ rr() {
                 ;;
         esac
     done
+    echo "回收站总大小: $(du -sh "$trash" 2>/dev/null | cut -f1)  使用 rc 清空回收站"
 }
-alias rl='lsd -lha /tmp/delete'
 alias rc='rm -rf /tmp/delete/{*,.[!.]*}'
 
 # rsync封装函数
@@ -192,5 +196,5 @@ fi
 
 # 终端启动时显示消息
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
-echo -e "\e[1;34mUpdate Time:26-07-18\e[0m"
+echo -e "\e[1;34mUpdate Time:26-10-24\e[0m"
 echo -e "\e[1;36m<==============================>\e[0m"
