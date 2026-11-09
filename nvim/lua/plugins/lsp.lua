@@ -111,6 +111,8 @@ return {
             vim.lsp.config('clangd', {
                 cmd = {
                     'clangd',
+                    -- 补全时不自动插入 #include（默认 iwyu 会往文件头塞一堆头文件）
+                    '--header-insertion=never',
                     -- 自定义 clang-tidy 检查集，完全替代项目的 .clang-tidy 文件
                     -- 顺序处理：先禁用所有，再逐步启用需要的组
                     '--clang-tidy-checks=-*,'
