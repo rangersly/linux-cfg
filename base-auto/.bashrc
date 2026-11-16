@@ -114,43 +114,6 @@ rr() {
 }
 alias rc='rm -rf /tmp/delete/{*,.[!.]*}'
 
-# rsync封装函数
-cr() {
-    if [ $# -lt 2 ]; then
-        echo "Usage: cr source... destination"
-        return 1
-    fi
-
-    # 获取最后一个参数(目标路径)
-    local destination="${@: -1}"
-    # 获取除最后一个参数外的所有参数(源文件/目录)
-    local sources=("${@:1:$#-1}")
-
-    # 执行 rsync 命令
-    rsync -ahP --info=progress2 \
-    --super \
-    "${sources[@]}" "$destination" 2>/dev/null
-
-     local exit_code=$?
-
-    # 如果失败且是权限问题,询问是否使用sudo
-    if [ $exit_code -ne 0 ]; then
-        echo "Copy error, exit code : $exit_code"
-        # 询问是否使用sudo
-        read -p "Do you use sudo to retry?[y/N] " -n 1 -r
-        echo
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-            echo "Use sudo retry..."
-            sudo rsync -ahP --info=progress2 \
-                --super \
-                "${sources[@]}" "$destination"
-            return $?
-        fi
-    fi
-
-    return $exit_code
-}
-
 # 快速重载
 alias reload='source ~/.bashrc'
 
