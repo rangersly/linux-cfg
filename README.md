@@ -6,7 +6,7 @@
 
 |根目录下文件和文件夹|包含内容及作用|
 |---|---|
-|`link`|把仓库配置软链接到本机,`git pull` 即完成同步|
+|`link.sh`|把仓库配置软链接到本机,`git pull` 即完成同步|
 |`base-auto`|适用于任何linux发行版的简易配置|
 |`arch`|archlinux系统专用配置|
 |`nvim`|nvim相关配置|

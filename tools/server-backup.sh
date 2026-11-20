@@ -1,3 +1,4 @@
+#!/bin/bash
 # Copyright(c) 2026 rangersly. All rights reserved.
 #
 # Program:
@@ -10,7 +11,6 @@
 # AUTHOR:
 #		rangersly "2281598291@qq.com"
 #
-#!/bin/bash
 
 # 这个脚本目前看来有不少地方需要改进
 # 我的方案是设计成备份目录下单独给每个需要备份的应用分一个文件夹

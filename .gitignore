@@ -4,7 +4,6 @@ __pycache__/
 **/.venv/
 **/node_modules/
 **/*_pages/
-opencode/package-lock.json
+*.tar.gz
 opencode/bun.lock
-opencode/.gitignore
 .DS_Store

@@ -35,8 +35,9 @@ is_linked() {
 link_item() {
     local local_path="$1" repo_path="$2"
     local src="$SCRIPT_DIR/$repo_path"
-    local dst="$HOME/$local_path"
+    local dst="$HOME/${local_path%/}"
     local desc="$local_path -> $repo_path"
+    local backup=""
 
     if [ ! -e "$src" ]; then
         echo "  ! 仓库缺少源,跳过: $repo_path"
@@ -48,24 +49,37 @@ link_item() {
         return
     fi
 
-    mkdir -p "$(dirname "$dst")"
+    if ! mkdir -p "$(dirname "$dst")"; then
+        echo "  ! 无法创建目录: $(dirname "$dst")" >&2
+        return 1
+    fi
 
     # 目标已存在(真实文件/目录,或指向别处的软链)则先备份,避免直接覆盖
     if [ -e "$dst" ] || [ -L "$dst" ]; then
-        local backup="$BACKUP_DIR/$local_path"
-        mkdir -p "$(dirname "$backup")"
-        mv "$dst" "$backup"
+        backup="$BACKUP_DIR/${local_path%/}"
+        if ! mkdir -p "$(dirname "$backup")" || ! mv "$dst" "$backup"; then
+            echo "  ! 备份失败,跳过: $dst" >&2
+            return 1
+        fi
         echo "  ~ 已备份原配置: $dst -> $backup"
     fi
 
-    ln -sfnT "$src" "$dst"
+    if ! ln -sfnT "$src" "$dst"; then
+        echo "  ! 创建链接失败: $desc" >&2
+        # 链接创建失败时把备份还原,避免配置丢失
+        if [ -n "$backup" ] && [ -e "$backup" ]; then
+            mv "$backup" "$dst"
+            echo "  ~ 已还原原配置: $dst" >&2
+        fi
+        return 1
+    fi
     echo "  + 已链接: $desc"
 }
 
 unlink_item() {
     local local_path="$1" repo_path="$2"
     local src="$SCRIPT_DIR/$repo_path"
-    local dst="$HOME/$local_path"
+    local dst="$HOME/${local_path%/}"
 
     if is_linked "$src" "$dst"; then
         rm "$dst"
@@ -80,7 +94,7 @@ unlink_item() {
 status_item() {
     local local_path="$1" repo_path="$2"
     local src="$SCRIPT_DIR/$repo_path"
-    local dst="$HOME/$local_path"
+    local dst="$HOME/${local_path%/}"
 
     if is_linked "$src" "$dst"; then
         echo "  [链接]   $local_path"
@@ -98,9 +112,14 @@ main() {
     case "$action" in
         link)
             echo "部署配置(软链接)..."
+            local failed=0
             for mapping in "${MAPPINGS[@]}"; do
-                link_item "${mapping%%:*}" "${mapping#*:}"
+                link_item "${mapping%%:*}" "${mapping#*:}" || failed=$((failed + 1))
             done
+            if [ "$failed" -gt 0 ]; then
+                echo "完成,但有 $failed 项失败,请检查上面的报错。" >&2
+                exit 1
+            fi
             echo "完成。仓库改动通过 git pull 即可同步到本机。"
             ;;
         unlink)
