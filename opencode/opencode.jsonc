@@ -2,13 +2,14 @@
   "$schema": "https://opencode.ai/config.json",
   "permission": {
     "external_directory": {
-      "*": "ask",
-      "/tmp/*": "allow",
-      "/var/tmp/*": "allow",
-      "~/.config/opencode/*": "allow"
+      "*": "allow"
     },
     "edit": {
       "*": "allow",
+      "/*": "ask",
+      "/tmp/*": "allow",
+      "/var/tmp/*": "allow",
+      "~/.config/opencode/*": "allow",
       ".git/**": "ask",
       "**/.git/**": "ask"
     },
