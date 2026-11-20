@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/PRD asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to "review since X".
+description: Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/PRD asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress or current changes, or asks to "review since X". If no fixed point is given, review the working tree.
 ---
 
 Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
@@ -16,11 +16,11 @@ If `docs/agents/issue-tracker.md` exists in the repo, use it to fetch issue/PR c
 
 ### 1. Pin the fixed point
 
-Whatever the user said is the fixed point — a commit SHA, branch name, tag, `main`, `HEAD~5`, etc. If they didn't specify one, ask for it.
+如果用户给了固定点(commit SHA、分支、tag、`main`、`HEAD~5` 等),以它为准;如果没给,**默认审查当前工作区改动**(`git diff` 与 `git diff --cached`),不要空等用户提供固定点。
 
-Capture the diff command once: `git diff <fixed-point>...HEAD` (three-dot, so the comparison is against the merge-base). Also note the list of commits via `git log <fixed-point>..HEAD --oneline`.
+捕获 diff 命令:有固定点时用 `git diff <fixed-point>...HEAD`(三点,对比 merge-base),并 `git log <fixed-point>..HEAD --oneline`;无固定点时用 `git diff` / `git status` 覆盖未提交改动。
 
-Before going further, confirm the fixed point resolves (`git rev-parse <fixed-point>`) and the diff is non-empty. A bad ref or empty diff should fail here — not inside two parallel sub-agents.
+继续之前先确认非空:给定固定点时先 `git rev-parse <fixed-point>` 校验;diff 为空则直接说明“无改动可审查”,不要启动子代理。
 
 ### 2. Identify the spec source
 
@@ -57,7 +57,7 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 
 ### 4. Spawn both sub-agents in parallel
 
-Send a single message with two `Agent` tool calls. Use the `general-purpose` subagent for both.
+用 `task` 工具在同一条消息里并行发起两个子代理,两者的 `subagent_type` 都用 `general`。
 
 **Standards sub-agent prompt** — include:
 

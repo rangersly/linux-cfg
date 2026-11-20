@@ -1,4 +1,4 @@
-import type { PluginInput, PluginOptions, Plugin, Hooks } from "@opencode-ai/plugin"
+import type { Plugin } from "@opencode-ai/plugin"
 
 type Redirect = { tool: string; reason: string }
 
@@ -180,17 +180,16 @@ function message(name: string, tool: string, reason: string): string {
   )
 }
 
-export default {
-  id: "bash-guard",
-  async server(_input: PluginInput, _options?: PluginOptions): Promise<Hooks> {
-    return {
-      "tool.execute.before": async (input, output) => {
-        if (input.tool !== "bash") return
-        const command: string | undefined = output.args.command
-        if (!command) return
-        const msg = guard(command)
-        if (msg) throw new Error(msg)
-      },
-    }
-  },
-} satisfies { id: string; server: Plugin }
+const BashGuard: Plugin = async () => {
+  return {
+    "tool.execute.before": async (input, output) => {
+      if (input.tool !== "bash") return
+      const command: string | undefined = output.args.command
+      if (!command) return
+      const msg = guard(command)
+      if (msg) throw new Error(msg)
+    },
+  }
+}
+
+export default BashGuard

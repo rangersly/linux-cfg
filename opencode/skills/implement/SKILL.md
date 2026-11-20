@@ -6,10 +6,10 @@ disable-model-invocation: true
 
 Implement the work described by the user in the spec or tickets.
 
-Use /tdd where possible, at pre-agreed seams.
+在预先约定的 seam 上尽量使用 `tdd` skill。
 
-Run typechecking regularly, single test files regularly, and the full test suite once at the end.
+定期运行类型检查与单个测试文件,最后再跑一次完整测试套件。
 
-Once done, use /code-review to review the work.
+完成后用 `code-review` skill 复查改动。
 
-Commit your work to the current branch.
+不要主动提交:把改动留在工作区;需要提交时先征得用户同意(遵循全局 AGENTS.md)。
