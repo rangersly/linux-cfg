@@ -1,3 +1,10 @@
 .netrwhist
 __pycache__/
 *.pyc
+**/.venv/
+**/node_modules/
+**/*_pages/
+opencode/package-lock.json
+opencode/bun.lock
+opencode/.gitignore
+.DS_Store

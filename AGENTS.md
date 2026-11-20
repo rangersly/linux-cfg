@@ -2,13 +2,21 @@
 
 个人 Linux 配置文件集合，非应用程序。无 lint / typecheck / test 流程。
 
-## sync-config.sh — 核心同步脚本
+## link.sh — 核心部署脚本
 
-用法：`./sync-config.sh push`（本机→仓库）/ `./sync-config.sh pull`（仓库→本机）
+仓库文件即本机配置：脚本用软链接把仓库路径链到本机，`git pull` 即完成同步，无需复制。
 
-push 前会自动执行 `bash -n` 检查所有 `.sh` 文件语法，有错误则中止推送。
+用法：
 
-路径映射（搞混方向会覆盖文件）：
+- `./link.sh`（或 `link`）：部署配置，把本机路径软链到仓库；已存在的真实文件会先备份到 `/tmp/config-link-backup/<时间戳>/`
+- `./link.sh unlink`：移除指向仓库的软链接
+- `./link.sh status`：查看各配置链接状态
+
+新设备一行部署：`git clone <仓库> ~/linux-cfg && ~/linux-cfg/link.sh`
+
+生成物（`.venv/`、`node_modules/`、`__pycache__/` 等）由 `.gitignore` 忽略，不进入 git。`opencode/` 为整目录软链，新设备部署后需在该目录执行 `npm install`。
+
+路径映射：
 
 | 本机路径 ($HOME) | 仓库路径 |
 |---|---|
@@ -18,14 +26,7 @@ push 前会自动执行 `bash -n` 检查所有 `.sh` 文件语法，有错误则
 | `.vim/` | `base-auto/.vim/` |
 | `.config/nvim/` | `nvim/` |
 | `.config/btop/` | `btop/` |
-| `.config/opencode/agent` | `opencode/agent` |
-| `.config/opencode/command` | `opencode/command` |
-| `.config/opencode/skills` | `opencode/skills` |
-| `.config/opencode/AGENTS.md` | `opencode/AGENTS.md` |
-| `.config/opencode/opencode.jsonc` | `opencode/opencode.jsonc` |
-| `.config/opencode/tui.json` | `opencode/tui.json` |
-| `.config/opencode/bash-guard.ts` | `opencode/bash-guard.ts` |
-| `.config/opencode/package.json` | `opencode/package.json` |
+| `.config/opencode/` | `opencode/` |
 
 ## nvim/ — Neovim 配置
 
