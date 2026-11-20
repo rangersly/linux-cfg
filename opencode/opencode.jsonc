@@ -28,23 +28,7 @@
       "poweroff*": "ask",
       "halt*": "ask",
       "docker system prune*": "ask",
-      "docker volume rm*": "ask",
-      "find": "deny",
-      "find *": "deny",
-      "grep": "deny",
-      "grep *": "deny",
-      "rg": "deny",
-      "rg *": "deny",
-      "cat": "deny",
-      "cat *": "deny",
-      "head": "deny",
-      "head *": "deny",
-      "tail": "deny",
-      "tail *": "deny",
-      "sed": "deny",
-      "sed *": "deny",
-      "ls": "deny",
-      "ls *": "deny"
+      "docker volume rm*": "ask"
     }
   },
   "plugin": [
