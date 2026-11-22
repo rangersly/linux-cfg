@@ -6,4 +6,5 @@ __pycache__/
 **/*_pages/
 *.tar.gz
 opencode/bun.lock
+opencode/service.json
 .DS_Store

@@ -135,11 +135,6 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ~='cd ~'
 
-if command -v opencode &>/dev/null; then
-    # opencode web 快速启动
-    alias ow='opencode web --hostname 0.0.0.0 --port 20020'
-fi
-
 if command -v nvim &>/dev/null; then
     alias nv='nvim'
     export EDITOR=nvim

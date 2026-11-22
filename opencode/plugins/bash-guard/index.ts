@@ -1,4 +1,4 @@
-import type { Plugin } from "@opencode-ai/plugin"
+import { Plugin } from "@opencode/plugin"
 
 type Redirect = { tool: string; reason: string }
 
@@ -21,7 +21,7 @@ const REDIRECTS: Record<string, Redirect> = {
   exa: { tool: "glob", reason: "listing files" },
   eza: { tool: "glob", reason: "listing files" },
   dir: { tool: "glob", reason: "listing files" },
-  cd: { tool: "bash", reason: "changing directory" },
+  cd: { tool: "shell", reason: "changing directory" },
 }
 
 const SCANNERS = new Set(["grep", "rg", "ag", "ack", "find", "fd", "tree"])
@@ -168,9 +168,9 @@ function guard(command: string): string | null {
 }
 
 function message(name: string, tool: string, reason: string): string {
-  if (tool === "bash") {
+  if (tool === "shell") {
     return (
-      `Command '${name}' was blocked. Use the \`bash\` tool's \`workdir\` parameter instead of \`${name}\` (${reason}).\n\n` +
+      `Command '${name}' was blocked. Use the \`shell\` tool's \`workdir\` parameter instead of \`${name}\` (${reason}).\n\n` +
       `Tip: If you really want to run it via bash, append a "# confirm" comment and retry.`
     )
   }
@@ -180,16 +180,18 @@ function message(name: string, tool: string, reason: string): string {
   )
 }
 
-const BashGuard: Plugin = async () => {
-  return {
-    "tool.execute.before": async (input, output) => {
-      if (input.tool !== "bash") return
-      const command: string | undefined = output.args.command
-      if (!command) return
-      const msg = guard(command)
+const BashGuard = Plugin.define({
+  id: "bash-guard",
+  async setup(ctx) {
+    await ctx.tool.hook("execute.before", (event) => {
+      const tool = String(event.tool)
+      if (tool !== "shell" && tool !== "bash") return
+      const input = event.input as { command?: string } | undefined
+      if (!input?.command) return
+      const msg = guard(input.command)
       if (msg) throw new Error(msg)
-    },
-  }
-}
+    })
+  },
+})
 
 export default BashGuard

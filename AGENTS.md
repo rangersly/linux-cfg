@@ -48,7 +48,12 @@
 
 - `ls`/`ll`/`lt` 被 alias 为 `lsd`（非 GNU ls），依赖 `lsd` 包
 - 默认编辑器：nvim（安装了）> vim
-- `ow` alias = `opencode web --hostname 0.0.0.0 --port 20020`
+
+## opencode/
+
+- `~/.config/opencode` 是整目录软链，OpenCode 的 inotify 监听会报 `Not a directory`，改 `opencode.jsonc` 后不会自动生效，需执行 `opencode reload`。
+- V2 目录：`agents/`、`commands/`、`plugins/`；旧的 `agent/`、`command/`、`plugin/` 仍兼容。
+- `cli.json` 是 V2 终端配置，替代已删除的 `tui.json`。
 
 ## 中文标点自动转换（nvim）
 

@@ -1,59 +1,80 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "permission": {
-    "external_directory": {
-      "*": "allow"
-    },
-    "edit": {
-      "*": "allow",
-      "/*": "ask",
-      "/tmp/*": "allow",
-      "/var/tmp/*": "allow",
-      "~/.config/opencode/*": "allow",
-      ".git/**": "ask",
-      "**/.git/**": "ask"
-    },
-    "bash": {
-      "*": "allow",
-      "rm *": "ask",
-      "git push *": "ask",
-      "mkfs*": "ask",
-      "wipefs*": "ask",
-      "fdisk*": "ask",
-      "parted*": "ask",
-      "sgdisk*": "ask",
-      "dd *": "ask",
-      "shutdown*": "ask",
-      "reboot*": "ask",
-      "poweroff*": "ask",
-      "halt*": "ask",
-      "docker system prune*": "ask",
-      "docker volume rm*": "ask"
-    }
-  },
-  "plugin": [
-    "./bash-guard.ts"
+  "permissions": [
+    { "action": "edit", "resource": "*", "effect": "allow" },
+    { "action": "edit", "resource": ".git/*", "effect": "ask" },
+    { "action": "edit", "resource": "*/.git/*", "effect": "ask" },
+    { "action": "edit", "resource": "*.env", "effect": "ask" },
+    { "action": "edit", "resource": "*.env.*", "effect": "ask" },
+    { "action": "edit", "resource": "*.env.example", "effect": "allow" },
+    { "action": "edit", "resource": "/tmp/*", "effect": "allow" },
+    { "action": "edit", "resource": "/var/tmp/*", "effect": "allow" },
+    { "action": "edit", "resource": "~/.config/opencode/*", "effect": "allow" },
+    { "action": "shell", "resource": "*", "effect": "allow" },
+    { "action": "shell", "resource": "rm *", "effect": "ask" },
+    { "action": "shell", "resource": "git push *", "effect": "ask" },
+    { "action": "shell", "resource": "git reset --hard *", "effect": "ask" },
+    { "action": "shell", "resource": "git clean *", "effect": "ask" },
+    { "action": "shell", "resource": "sudo *", "effect": "ask" },
+    { "action": "shell", "resource": "mkfs*", "effect": "ask" },
+    { "action": "shell", "resource": "wipefs*", "effect": "ask" },
+    { "action": "shell", "resource": "fdisk*", "effect": "ask" },
+    { "action": "shell", "resource": "parted*", "effect": "ask" },
+    { "action": "shell", "resource": "sgdisk*", "effect": "ask" },
+    { "action": "shell", "resource": "dd *", "effect": "ask" },
+    { "action": "shell", "resource": "shutdown*", "effect": "ask" },
+    { "action": "shell", "resource": "reboot*", "effect": "ask" },
+    { "action": "shell", "resource": "poweroff*", "effect": "ask" },
+    { "action": "shell", "resource": "halt*", "effect": "ask" },
+    { "action": "shell", "resource": "docker system prune*", "effect": "ask" },
+    { "action": "shell", "resource": "docker volume rm*", "effect": "ask" }
   ],
-  "experimental": {
-    "continue_loop_on_deny": true
-  },
-  "provider": {
+  "policies": [
+    { "action": "tool.use", "resource": "read:*/.ssh/id_*", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*/.ssh/*.pub", "effect": "allow" },
+    { "action": "tool.use", "resource": "read:*/.aws/credentials", "effect": "deny" }
+  ],
+  "plugins": ["./plugins/bash-guard"],
+  "providers": {
     "llama.cpp": {
-      "npm": "@ai-sdk/openai-compatible",
       "name": "llama-server (local)",
-      "options": {
+      "package": "@opencode/ai/providers/openai-compatible",
+      "settings": {
         "baseURL": "http://127.0.0.1:22233/v1"
       },
       "models": {
         "ornith1.5-9B.gguf": {
           "name": "ornith1.5 (local)",
-          "tool_call": true,
-          "limit": {
-            "context": 85000,
-            "output": 6000
-          }
+          "capabilities": { "tools": true },
+          "limit": { "context": 85000, "output": 6000 }
         }
       }
     }
+  },
+  "compaction": {
+    "auto": true,
+    "keep": { "tokens": 12000 },
+    "buffer": "15%"
+  },
+  "tool_output": {
+    "max_lines": 1500,
+    "max_bytes": 40960
+  },
+  "media": {
+    "image": {
+      "auto_resize": true,
+      "max_width": 2000,
+      "max_height": 2000,
+      "max_base64_bytes": 5242880
+    }
+  },
+  "watcher": {
+    "ignore": [
+      "**/node_modules/**",
+      "**/.venv/**",
+      "**/__pycache__/**",
+      "**/dist/**",
+      "**/build/**"
+    ]
   }
 }

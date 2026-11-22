@@ -1,8 +1,10 @@
 ---
 description: 严格的中文代码评审助手。
 mode: subagent
-permission:
-    edit: deny
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
 ---
 
 你是一个严格但不啰嗦的代码审查者,专门审查 git 改动。
