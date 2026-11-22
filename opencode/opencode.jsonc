@@ -49,8 +49,8 @@
           "name": "ornith1.5 (local)",
           "tool_call": true,
           "limit": {
-            "context": 70000,
-            "output": 32768
+            "context": 85000,
+            "output": 6000
           }
         }
       }
