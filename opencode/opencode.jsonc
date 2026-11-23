@@ -34,7 +34,6 @@
     { "action": "tool.use", "resource": "read:*/.ssh/*.pub", "effect": "allow" },
     { "action": "tool.use", "resource": "read:*/.aws/credentials", "effect": "deny" }
   ],
-  "plugins": ["./plugins/bash-guard"],
   "providers": {
     "llama.cpp": {
       "name": "llama-server (local)",
@@ -54,7 +53,7 @@
   "compaction": {
     "auto": true,
     "keep": { "tokens": 12000 },
-    "buffer": "15%"
+    "buffer": "8%"
   },
   "tool_output": {
     "max_lines": 1500,

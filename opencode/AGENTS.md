@@ -12,13 +12,7 @@
 
 ## 文件检索与读取工具规范
 
-- 查找文件:必须使用 `glob` 工具,禁止使用 bash 的 `find`/`fd`/`ls`/`tree`。
-- 搜索文件内容:必须使用 `grep` 工具,禁止使用 bash 的 `grep`/`rg`/`ag`/`ack`,以及 `git grep`。
-- 读取文件:必须使用 `read` 工具,禁止使用 bash 的 `cat`/`head`/`tail`/`less`/`more`/`bat`。
-- 修改文件:必须使用 `edit`/`write` 工具,禁止使用 bash 的 `sed`。
-- 切换目录:必须使用 bash 工具的 `workdir` 参数,禁止使用 `cd`。
-- 搜索时始终限定在具体项目目录内,不要从用户主目录或根目录开始扫描。
-- 例外:确有必要通过 shell 执行上述命令时,在命令末尾追加 `# confirm` 放行。
+- 修改文件:优先使用 `edit`/`write` 工具。
 
 ## 代码改动规范
 
