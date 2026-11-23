@@ -64,58 +64,54 @@ parse_git_branch() {
      PS1+="\n${GitColor}> ${Reset}"
  }
 
-# 彩色输出
-alias grep='grep --color=auto'
-
-if command -v lsd &>/dev/null; then
-    # lsd别称
-    alias l='lsd -lh --git'
-    alias ll='lsd -lh --git -a'
-    alias ls='lsd -lh --git -a --total-size'
-    alias lt='lsd --tree --ignore-glob ".git"'
-    echo "检测到 lsd, 使用优化版 ls 映射"
-fi
-
 # 安全回收站删除
 rr() {
-    local trash="/tmp/delete"
+    local trash="${XDG_DATA_HOME:-$HOME/.local/share}/Trash"
+    if [ $# -eq 0 ]; then
+        echo "用法: rr <文件或目录>..." >&2
+        return 1
+    fi
     mkdir -p "$trash"
-    local force=false
-    local item base
+    local item base dest
     for item in "$@"; do
-        case "$item" in
-            -f) force=true ;;
-            -*) ;;   # 忽略其他任何 - 开头的参数
-            *)
-                if [ -e "$item" ] || [ -L "$item" ]; then
-                    base=$(basename "$item")
-                    # 非强制模式 且 是隐藏文件 → 跳过
-                    if ! $force && [[ "$base" == .* ]]; then
-                        echo "rr: 跳过隐藏文件 '$item' - 使用-f参数可以强制移除" >&2
-                        continue
-                    fi
-                    local dest="$trash/${base}_$(date +%y-%m-%d_%H-%M-%S)"
-                    # 移动（-n 防止覆盖回收站已有文件，-f 时改用 mv -f）
-                    if $force; then
-                        mv -f "$item" "$dest"
-                    else
-                        mv -n "$item" "$dest"
-                    fi
-                    if [ -e "$dest" ] || [ -L "$dest" ]; then
-                        echo "已移入回收站: $dest"
-                    fi
-                else
-                    echo "rr: 无法删除 '$item': 没有那个文件或目录" >&2
-                fi
-                ;;
-        esac
+        if [ -e "$item" ] || [ -L "$item" ]; then
+            base=$(basename "$item")
+            dest="$trash/${base}_$(date +%y-%m-%d_%H-%M-%S)"
+            if mv -n -- "$item" "$dest"; then
+                echo "已移入回收站: $dest"
+            else
+                echo "rr: 移动失败 '$item'" >&2
+            fi
+        else
+            echo "rr: 无法删除 '$item': 没有那个文件或目录" >&2
+        fi
     done
     echo "回收站总大小: $(du -sh "$trash" 2>/dev/null | cut -f1)  使用 rc 清空回收站"
 }
-alias rc='rm -rf /tmp/delete/{*,.[!.]*}'
-
-# 快速重载
-alias reload='source ~/.bashrc'
+rc() {
+    local trash="${XDG_DATA_HOME:-$HOME/.local/share}/Trash"
+    if [ ! -d "$trash" ]; then
+        echo "回收站为空, 无需清理"
+        return
+    fi
+    if [ -z "$(find "$trash" -mindepth 1 -maxdepth 1 -print -quit 2>/dev/null)" ]; then
+        echo "回收站为空, 无需清理"
+        return
+    fi
+    echo "=== 回收站内容 ==="
+    ls -A "$trash"
+    read -r -p "确认删除以上文件?(Y/n): " reply
+    if [ "$reply" != "Y" ]; then
+        echo "已取消"
+        return
+    fi
+    if find "$trash" -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +; then
+        echo "回收站已清空"
+    else
+        echo "rc: 部分内容清理失败, 请检查 $trash" >&2
+        return 1
+    fi
+}
 
 # 错误纠正
 shopt -s cdspell                     # 自动纠正cd命令的目录名拼写错误
@@ -129,11 +125,24 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# 彩色输出
+alias grep='grep --color=auto'
+
+if command -v lsd &>/dev/null; then
+    # lsd别称
+    alias l='lsd -lh --git'
+    alias ll='lsd -lh --git -a'
+    echo "检测到 lsd, 使用优化版 ls 映射"
+fi
+
 # 快速导航
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ~='cd ~'
+
+# 快速分析磁盘存储
+alias ssi='sudo du -xhd1 . | sort -h'
 
 if command -v nvim &>/dev/null; then
     alias nv='nvim'
