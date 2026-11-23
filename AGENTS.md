@@ -25,7 +25,6 @@
 | `.tmux.conf` | `base-auto/.tmux.conf` |
 | `.vim/` | `base-auto/.vim/` |
 | `.config/nvim/` | `nvim/` |
-| `.config/btop/` | `btop/` |
 | `.config/opencode/` | `opencode/` |
 
 ## nvim/ — Neovim 配置
