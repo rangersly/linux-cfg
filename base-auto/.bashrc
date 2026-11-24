@@ -166,30 +166,31 @@ echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
 echo -e "\e[1;34mUpdate Time:26-10-24\e[0m"
 echo -e "\e[1;36m<==============================>\e[0m"
 
-# ==================== 代理开关 ====================
-# 用法: proxy_on [地址:端口]   默认 127.0.0.1:10808
-#       proxy_off
-proxy_on() {
-    # 不传参数则用默认值; 只传端口时自动补 127.0.0.1
-    local target="${1:-127.0.0.1:10808}"
-    # 容忍误带协议前缀的写法, 如 http://127.0.0.1:10808
-    target="${target#http://}"; target="${target#https://}"
-    target="${target#socks5h://}"; target="${target#socks5://}"
-    [[ "$target" != *:* ]] && target="127.0.0.1:$target"
+# ==================== 临时代理 ====================
+# 用法: proxy on [地址:端口]   临时开启代理，默认 127.0.0.1:10808
+#       proxy                关闭代理
+# 变量清单只维护一份，开启与关闭共用，避免两边不一致
+_proxy_vars="http_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY ALL_PROXY no_proxy NO_PROXY"
 
-    export http_proxy="http://$target"
-    export https_proxy="$http_proxy"
-    export HTTP_PROXY="$http_proxy"
-    export HTTPS_PROXY="$https_proxy"
-    # 本机与内网地址不走代理
-    export no_proxy="localhost,127.0.0.1,::1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,*.local"
-    export NO_PROXY="$no_proxy"
+proxy() {
+    if [[ $1 == on ]]; then
+        local p="${2:-127.0.0.1:10808}"
+        # 容忍误带协议前缀的写法，如 http://127.0.0.1:10808
+        p="${p#http://}"; p="${p#https://}"
+        p="${p#socks5h://}"; p="${p#socks5://}"
+        # 只传端口时自动补 127.0.0.1
+        [[ $p != *:* ]] && p="127.0.0.1:$p"
 
-    echo "代理已开启: $target"
+        export http_proxy="http://$p"  https_proxy="http://$p"  all_proxy="socks5h://$p" \
+               HTTP_PROXY="http://$p"  HTTPS_PROXY="http://$p"  ALL_PROXY="socks5h://$p" \
+               no_proxy="localhost,127.0.0.1,::1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.local" \
+               NO_PROXY="localhost,127.0.0.1,::1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.local"
+        echo "代理已开启: $p"
+    else
+        unset $_proxy_vars
+        echo "代理已关闭"
+    fi
 }
-
-proxy_off() {
-    unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY no_proxy NO_PROXY all_proxy ALL_PROXY
-    echo "代理已关闭"
-}
-# ================== 代理开关结束 ==================
+# 新 shell 默认无代理，清掉系统注入的失效残留
+unset $_proxy_vars
+# ================== 临时代理结束 ==================
