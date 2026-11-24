@@ -60,7 +60,6 @@ insert 模式下，中文标点（，。！？等）会自动映射为英文标�
 
 ## tools/
 
-- `proxy.sh`：开关 HTTP 代理，硬编码地址 `172.23.0.1:7897`，修改需改源码；必须用 `source tools/proxy.sh on|off` 执行，直接执行不会影响当前 shell
 - `server-backup.sh`：遍历自身所在目录的子目录，tar.gz 备份到 `/mnt/backup/app/`，保留 30 份
 
 ## arch/archlinux-autoInstall.sh

@@ -165,3 +165,31 @@ fi
 echo -e "\e[1;32mWelcome to My Linux, \e[1;35m$USER!\e[0m"
 echo -e "\e[1;34mUpdate Time:26-10-24\e[0m"
 echo -e "\e[1;36m<==============================>\e[0m"
+
+# ==================== 代理开关 ====================
+# 用法: proxy_on [地址:端口]   默认 127.0.0.1:10808
+#       proxy_off
+proxy_on() {
+    # 不传参数则用默认值; 只传端口时自动补 127.0.0.1
+    local target="${1:-127.0.0.1:10808}"
+    # 容忍误带协议前缀的写法, 如 http://127.0.0.1:10808
+    target="${target#http://}"; target="${target#https://}"
+    target="${target#socks5h://}"; target="${target#socks5://}"
+    [[ "$target" != *:* ]] && target="127.0.0.1:$target"
+
+    export http_proxy="http://$target"
+    export https_proxy="$http_proxy"
+    export HTTP_PROXY="$http_proxy"
+    export HTTPS_PROXY="$https_proxy"
+    # 本机与内网地址不走代理
+    export no_proxy="localhost,127.0.0.1,::1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,*.local"
+    export NO_PROXY="$no_proxy"
+
+    echo "代理已开启: $target"
+}
+
+proxy_off() {
+    unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY no_proxy NO_PROXY all_proxy ALL_PROXY
+    echo "代理已关闭"
+}
+# ================== 代理开关结束 ==================
