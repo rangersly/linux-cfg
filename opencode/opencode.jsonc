@@ -31,17 +31,25 @@
     { "action": "tool.use", "resource": "read:*/.aws/credentials", "effect": "deny" }
   ],
   "providers": {
-    "llama.cpp": {
-      "name": "llama-server (local)",
+
+    "newapi": {
+      "name": "New API",
+      // 凭据优先由 /connect 保存；也可通过该环境变量提供
+      "env": ["NEWAPI_API_KEY"],
       "package": "@opencode/ai/providers/openai-compatible",
       "settings": {
-        "baseURL": "http://127.0.0.1:22233/v1"
+        "baseURL": "https://ai.rgna.cc:20043/v1"
       },
       "models": {
-        "ornith1.5-9B.gguf": {
-          "name": "ornith1.5 (local)",
+        "ornith1.5": {
+          "name": "ornith1.5 (New API)",
           "capabilities": { "tools": true },
           "limit": { "context": 83000, "output": 16000 }
+        },
+        "qwen3.8-27b": {
+          "name": "qwen3.8 (New API)",
+          "capabilities": { "tools": true },
+          "limit": { "context": 128000, "output": 16000 }
         }
       }
     }

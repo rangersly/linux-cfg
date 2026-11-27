@@ -17,7 +17,7 @@
     "indicators": "status"
   },
   "session": {
-    "sidebar": "auto",
+    "sidebar": "hide",
     "scrollbar": false,
     "thinking": "hide",
     "tps": true
@@ -33,6 +33,9 @@
     "view": "auto"
   },
   "highlights": false,
+  "keybinds": {
+    "app.exit": "ctrl+c"
+  },
   "plugins": [
     {
       "package": "opencode-visual-cache",
