@@ -194,4 +194,3 @@ proxy() {
 # 新 shell 默认无代理，清掉系统注入的失效残留
 unset $_proxy_vars
 # ================== 临时代理结束 ==================
-. "/home/e0x1a/.acme.sh/acme.sh.env"
